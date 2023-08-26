@@ -14,7 +14,9 @@ namespace CodeSmellAnnotations.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CodeSmellAnnotatatedCodeAnalyzer : DiagnosticAnalyzer
     {
-        private static ImmutableArray<IRule> Rules = ImmutableArray.Create<IRule>(new CodeSmellAttributeRule());
+        private static ImmutableArray<IRule> Rules = ImmutableArray.Create<IRule>(
+            new CodeSmellAttributeRule(),
+            new DuplicateCodeAttributeRule());
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
             ImmutableArray.CreateRange(Rules.Select(r => r.Descriptor));
 
@@ -55,31 +57,38 @@ namespace CodeSmellAnnotations.Analyzers
             return Enumerable.Empty<AttributeSyntax>();
         }
 
-        private static void AnalyzeNeedsRefactoringAttribute(SyntaxNodeAnalysisContext context)
+        private static Location GetLocation(SyntaxNode node)
         {
-            
-            Location location = default;
-            if (context.Node is BaseTypeDeclarationSyntax typeDeclarationSyntax)
+            Location location = null;
+            if (node is BaseTypeDeclarationSyntax typeDeclarationSyntax)
             {
                 location = typeDeclarationSyntax.Identifier.GetLocation();
             }
-            else if (context.Node is PropertyDeclarationSyntax propertyDeclarationSyntax)
+            else if (node is PropertyDeclarationSyntax propertyDeclarationSyntax)
             {
                 location = propertyDeclarationSyntax.Identifier.GetLocation();
             }
-            else if (context.Node is FieldDeclarationSyntax fieldDeclarationSyntax)
+            else if (node is FieldDeclarationSyntax fieldDeclarationSyntax)
             {
                 location = fieldDeclarationSyntax.Declaration.GetLocation();
             }
-            else if (context.Node is ConstructorDeclarationSyntax constructorDeclarationSyntax)
+            else if (node is ConstructorDeclarationSyntax constructorDeclarationSyntax)
             {
                 location = constructorDeclarationSyntax.Identifier.GetLocation();
             }
-            else if (context.Node is AccessorDeclarationSyntax accessorDeclarationSyntax)
+            else if (node is AccessorDeclarationSyntax accessorDeclarationSyntax)
             {
-                location = accessorDeclarationSyntax.GetLocation();
+                location = accessorDeclarationSyntax.Body.GetLocation();
             }
-            else
+
+            return location;
+        }
+
+        private static void AnalyzeNeedsRefactoringAttribute(SyntaxNodeAnalysisContext context)
+        {
+            
+            var location = GetLocation(context.Node);
+            if (location == null)
             {
                 return;
             }
@@ -98,9 +107,9 @@ namespace CodeSmellAnnotations.Analyzers
                 if (attributeSyntaxMatch != null)
                 {
                     context.ReportDiagnostic(
-                        Diagnostic.Create(Rules.FirstOrDefault().Descriptor,
+                        Diagnostic.Create(rule.Descriptor,
                             location,
-                           rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
+                            rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
                 }
             }
         }

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace CodeSmellAnnotations
 {
     [CodeSmell("empty interface")]
+    [DuplicateCode(Duplicates = nameof(Class1))]
     internal interface ICodeSmellAnnotations
     {
 
     }
 
     [CodeSmell("refactor")]
-    [Obsolete]
     internal class Class1
     {
         [CodeSmell("empty constructor")]
@@ -36,7 +36,10 @@ namespace CodeSmellAnnotations
         public int MyProperty 
         {
             [CodeSmell("refactor accessor")]
-            get { return 1; } 
+            get 
+            { 
+                return 1; 
+            } 
         }
     }
 }
