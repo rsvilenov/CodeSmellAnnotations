@@ -32,7 +32,7 @@ namespace CodeSmellAnnotations.Analyzers
             }
 
             return; 
-            var containingType = context
+            /* var containingType = context
                 .SemanticModel
                 .GetSymbolInfo(attributeSyntax)
                 .Symbol
@@ -49,7 +49,7 @@ namespace CodeSmellAnnotations.Analyzers
                 {
                     context.ReportDiagnostic(Diagnostic.Create(rule.Descriptor, attributeSyntax.GetLocation(), rule.GetDiagnosticMessageArguments(attributeSyntax)));
                 }
-            }
+            } */
         }
     }
 }

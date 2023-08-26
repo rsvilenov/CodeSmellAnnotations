@@ -24,7 +24,7 @@ namespace CodeSmellAnnotations.Analyzers
         {
             context.EnableConcurrentExecution();
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
-            context.RegisterSyntaxNodeAction(AnalyzeNeedsRefactoringAttribute, 
+            context.RegisterSyntaxNodeAction(AnalyzeCodeSmellAttributes, 
                 SyntaxKind.PropertyDeclaration, 
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
@@ -39,19 +39,49 @@ namespace CodeSmellAnnotations.Analyzers
                 SyntaxKind.FieldDeclaration);
         }
 
+        private static void AnalyzeCodeSmellAttributes(SyntaxNodeAnalysisContext context)
+        {
+            var location = GetLocation(context.Node);
+            if (location == null)
+            {
+                return;
+            }
+
+            var attributesSyntaxList = GetAttributes(context.Node);
+            if (!attributesSyntaxList.Any())
+            {
+                return;
+            }
+
+            foreach (var rule in Rules)
+            {
+                var annotationAttributeType = context.SemanticModel.Compilation.GetTypeByMetadataName(rule.TriggeringAttributeType.FullName);
+                var attributeSyntaxMatch = attributesSyntaxList
+                    .FirstOrDefault(at => SymbolEqualityComparer.Default.Equals(context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType, annotationAttributeType));
+                
+                if (attributeSyntaxMatch != null)
+                {
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(rule.Descriptor,
+                            location,
+                            rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
+                }
+            }
+        }
+
         private static IEnumerable<AttributeSyntax> GetAttributes(SyntaxNode node)
         {
             if (node is MemberDeclarationSyntax memberDeclarationSyntax)
             {
                 return memberDeclarationSyntax
-                .AttributeLists
-                .SelectMany(al => al.Attributes);
+                    .AttributeLists
+                    .SelectMany(al => al.Attributes);
             }
             else if (node is AccessorDeclarationSyntax accessorDeclarationSyntax)
             {
                 return accessorDeclarationSyntax
-                .AttributeLists
-                .SelectMany(al => al.Attributes);
+                    .AttributeLists
+                    .SelectMany(al => al.Attributes);
             }
 
             return Enumerable.Empty<AttributeSyntax>();
@@ -60,6 +90,7 @@ namespace CodeSmellAnnotations.Analyzers
         private static Location GetLocation(SyntaxNode node)
         {
             Location location = null;
+
             if (node is BaseTypeDeclarationSyntax typeDeclarationSyntax)
             {
                 location = typeDeclarationSyntax.Identifier.GetLocation();
@@ -82,36 +113,6 @@ namespace CodeSmellAnnotations.Analyzers
             }
 
             return location;
-        }
-
-        private static void AnalyzeNeedsRefactoringAttribute(SyntaxNodeAnalysisContext context)
-        {
-            
-            var location = GetLocation(context.Node);
-            if (location == null)
-            {
-                return;
-            }
-
-            // Identifier is in BaseTypeDeclarationSyntax
-            // AttributeList is in MemberDeclarationSyntax
-            // BaseTypeDeclaration is also MemberDeclaration
-
-            var attributesSyntaxList = GetAttributes(context.Node);
-
-
-            foreach (var rule in Rules)
-            {
-                var attributeSyntaxMatch = attributesSyntaxList
-                    .FirstOrDefault(at => context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType?.ToDisplayString() == rule.TriggeringAttributeName);
-                if (attributeSyntaxMatch != null)
-                {
-                    context.ReportDiagnostic(
-                        Diagnostic.Create(rule.Descriptor,
-                            location,
-                            rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
-                }
-            }
         }
     }
 }

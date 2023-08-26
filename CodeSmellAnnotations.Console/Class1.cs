@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CodeSmellAnnotations
 {
     [CodeSmell("empty interface")]
-    [DuplicateCode(Duplicates = nameof(Class1))]
+    [DuplicateCode(Duplicates = nameof(Class1), Message = "test")]
     internal interface ICodeSmellAnnotations
     {
 
@@ -35,7 +35,7 @@ namespace CodeSmellAnnotations
         [CodeSmell("refactor property")]
         public int MyProperty 
         {
-            [CodeSmell("refactor accessor")]
+            // [CodeSmell("refactor accessor")]
             get 
             { 
                 return 1; 

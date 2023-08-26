@@ -1,6 +1,8 @@
 ﻿using CodeSmellAnnotations.Analyzers.Extensions;
+using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
@@ -14,7 +16,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
 
-        public string TriggeringAttributeName => "CodeSmellAnnotations.Attributes.CodeSmellAttribute";
+        public Type TriggeringAttributeType => typeof(CodeSmellAttribute);
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {
