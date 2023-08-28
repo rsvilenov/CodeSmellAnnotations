@@ -22,7 +22,7 @@ namespace CodeSmellAnnotations
         [CodeSmell("empty constructor")]
         public Class1()
         {
-
+            a1 = 1;
         }
 
         [CodeSmell("casing")]
@@ -32,16 +32,16 @@ namespace CodeSmellAnnotations
         }
 
         [CodeSmell("do not use fields")]
-        [SolidViolation(SolidPrinciple.OpenClosed, Reason = "don't know why")]
-        private int a1;
+        private readonly int a1;
 
-        [CodeSmell("refactor property")]
+        //[CodeSmell("refactor property")]
+        [SolidViolation(SolidPrinciple.OpenClosed, Reason = "don't know why")]
         public int MyProperty 
         {
             // [CodeSmell("refactor accessor")]
             get 
             { 
-                return 1; 
+                return a1; 
             } 
         }
     }

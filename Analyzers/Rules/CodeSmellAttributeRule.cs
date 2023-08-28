@@ -9,7 +9,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     internal class CodeSmellAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM001", 
+            => new DiagnosticDescriptor("SML001", 
                 "Code smell", 
                 "Code smell{0}", 
                 "CodeSmell", 

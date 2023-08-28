@@ -9,9 +9,9 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     internal class SolidViolationAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM005", 
+            => new DiagnosticDescriptor("SML005", 
                 "SOLID violation",
-                "Violates {0} SOLID principle {1}", 
+                "Violates {0} SOLID principle{1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);

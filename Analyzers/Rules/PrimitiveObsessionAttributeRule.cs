@@ -9,7 +9,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     internal class PrimitiveObsessionAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM003", 
+            => new DiagnosticDescriptor("SML003", 
                 "Primitive obsession",
                 "Primitive obsession{0}", 
                 "CodeSmell", 

@@ -9,9 +9,9 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     internal class DuplicateCodeAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM002", 
+            => new DiagnosticDescriptor("SML002", 
                 "Duplicate code", 
-                "Duplcate code.{0} {1}", 
+                "Duplcate code.{0}{1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);

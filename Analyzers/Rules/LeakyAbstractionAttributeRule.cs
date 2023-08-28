@@ -9,7 +9,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     internal class LeakyAbstractionAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM004", 
+            => new DiagnosticDescriptor("SML004", 
                 "Leaky abstraction",
                 "Leaky abstraction{0}", 
                 "CodeSmell", 
