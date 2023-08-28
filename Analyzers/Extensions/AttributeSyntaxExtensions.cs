@@ -3,44 +3,32 @@ using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Extensions
 {
-    public static class AttributeSyntaxExtensions
+    internal static class AttributeSyntaxExtensions
     {
         public static string GetStringArgumentValue(this AttributeSyntax attributeSyntax, string name = null)
         {
             var argumentSyntax = attributeSyntax
                 ?.ArgumentList
                 ?.Arguments
-                .FirstOrDefault(a =>
-                {
-                    if (name == null)
-                    {
-                        return true;
-                    }
+                .FirstOrDefault(a => name == null || GetArgumentName(a) == name);
 
-                    if (a.NameColon != null)
-                    {
-                        return a.NameColon.Name.ToString() == name;
-                    }
-                    else if (a.NameEquals != null)
-                    {
-                        return a.NameEquals.Name.ToString() == name;
-                    }
-
-                    return false;
-                });
-
-            if (argumentSyntax == null)
-            {
-                return null;
-            }
+            if (argumentSyntax == null) return null;
 
             if (argumentSyntax.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-            {
                 return memberAccessExpression.Name.Identifier.ValueText;
-            }
-            
-             return argumentSyntax.Expression.ToString();
-            // return argumentSyntax.Expression.NormalizeWhitespace().ToFullString();
+
+            return argumentSyntax.Expression.ToString();
+
+            /* 
+                var argumentValue = semanticModel.GetConstantValue(argumentSyntax.Expression).Value;
+
+                var argumentName = argumentSyntax.Expression.NormalizeWhitespace().ToFullString();
+            */
+        }
+
+        private static string GetArgumentName(AttributeArgumentSyntax a)
+        {
+            return a.NameColon?.Name?.ToString() ?? a.NameEquals?.Name?.ToString();
         }
     }
 }

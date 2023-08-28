@@ -21,8 +21,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {
             var message = attributeSyntax.GetStringArgumentValue();
-            var diagnosticMessageArgument = string.IsNullOrEmpty(message) ? null : $": {message}";
-            return new[] { diagnosticMessageArgument };
+            return new[] { string.IsNullOrEmpty(message) ? null : $": {message}" };
         }
     }
 }

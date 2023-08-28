@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -19,6 +18,7 @@ namespace CodeSmellAnnotations.Analyzers
             new PrimitiveObsessionAttributeRule(),
             new LeakyAbstractionAttributeRule(),
             new SolidViolationAttributeRule());
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
             ImmutableArray.CreateRange(Rules.Select(r => r.Descriptor));
 
@@ -44,16 +44,10 @@ namespace CodeSmellAnnotations.Analyzers
         private static void AnalyzeCodeSmellAttributes(SyntaxNodeAnalysisContext context)
         {
             var location = GetLocation(context.Node);
-            if (location == null)
-            {
-                return;
-            }
+            if (location == null) return;
 
             var attributesSyntaxList = GetAttributes(context.Node);
-            if (!attributesSyntaxList.Any())
-            {
-                return;
-            }
+            if (!attributesSyntaxList.Any()) return;
 
             foreach (var rule in Rules)
             {
@@ -61,60 +55,37 @@ namespace CodeSmellAnnotations.Analyzers
                 var attributeSyntaxMatch = attributesSyntaxList
                     .FirstOrDefault(at => SymbolEqualityComparer.Default.Equals(context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType, annotationAttributeType));
                 
-                if (attributeSyntaxMatch != null)
-                {
-                    context.ReportDiagnostic(
-                        Diagnostic.Create(rule.Descriptor,
-                            location,
-                            rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
-                }
+                if (attributeSyntaxMatch == null) continue;
+                
+                context.ReportDiagnostic(
+                    Diagnostic.Create(rule.Descriptor,
+                        location,
+                        rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
+                
             }
         }
 
         private static IEnumerable<AttributeSyntax> GetAttributes(SyntaxNode node)
         {
-            if (node is MemberDeclarationSyntax memberDeclarationSyntax)
+            return node switch
             {
-                return memberDeclarationSyntax
-                    .AttributeLists
-                    .SelectMany(al => al.Attributes);
-            }
-            else if (node is AccessorDeclarationSyntax accessorDeclarationSyntax)
-            {
-                return accessorDeclarationSyntax
-                    .AttributeLists
-                    .SelectMany(al => al.Attributes);
-            }
-
-            return Enumerable.Empty<AttributeSyntax>();
+                MemberDeclarationSyntax memberDeclarationSyntax => memberDeclarationSyntax.AttributeLists.SelectMany(al => al.Attributes),
+                AccessorDeclarationSyntax accessorDeclarationSyntax => accessorDeclarationSyntax.AttributeLists.SelectMany(al => al.Attributes),
+                _ => Enumerable.Empty<AttributeSyntax>(),
+            };
         }
 
         private static Location GetLocation(SyntaxNode node)
         {
-            Location location = null;
-
-            if (node is BaseTypeDeclarationSyntax typeDeclarationSyntax)
+            return node switch
             {
-                location = typeDeclarationSyntax.Identifier.GetLocation();
-            }
-            else if (node is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                location = propertyDeclarationSyntax.Identifier.GetLocation();
-            }
-            else if (node is FieldDeclarationSyntax fieldDeclarationSyntax)
-            {
-                location = fieldDeclarationSyntax.Declaration.GetLocation();
-            }
-            else if (node is ConstructorDeclarationSyntax constructorDeclarationSyntax)
-            {
-                location = constructorDeclarationSyntax.Identifier.GetLocation();
-            }
-            else if (node is AccessorDeclarationSyntax accessorDeclarationSyntax)
-            {
-                location = accessorDeclarationSyntax.Body.GetLocation();
-            }
-
-            return location;
+                BaseTypeDeclarationSyntax typeDeclarationSyntax => typeDeclarationSyntax.Identifier.GetLocation(),
+                PropertyDeclarationSyntax propertyDeclarationSyntax => propertyDeclarationSyntax.Identifier.GetLocation(),
+                FieldDeclarationSyntax fieldDeclarationSyntax => fieldDeclarationSyntax.Declaration.GetLocation(),
+                ConstructorDeclarationSyntax constructorDeclarationSyntax => constructorDeclarationSyntax.Identifier.GetLocation(),
+                AccessorDeclarationSyntax accessorDeclarationSyntax => accessorDeclarationSyntax.Body.GetLocation(),
+                _ => null,
+            };
         }
     }
 }
