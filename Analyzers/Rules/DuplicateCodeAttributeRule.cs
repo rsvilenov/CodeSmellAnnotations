@@ -3,7 +3,6 @@ using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
-using System.Text;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {

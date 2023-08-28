@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+		
+		<!-- when this is set to 'true', it removes the 'compile' asset from IncludeAssets and renders the dlls in 'lib' unreferencable -->
+		<DevelopmentDependency>false</DevelopmentDependency>
+		
+		<NoPackageAnalysis>true</NoPackageAnalysis>
+
+		<PackageId>CodeSmellAnnotations</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Rosen Svilenov</Authors>
+		<Description>Helps you annotate code smells in C# in an obtrusive way.</Description>
+		<Copyright>© Rosen Svilenov</Copyright>
+		<PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageProjectUrl>https://github.com/rsvilenov/CodeSmellAnnotations</PackageProjectUrl>
+		<PackageIcon>PackageIcon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/rsvilenov/CodeSmellAnnotations</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>code smell;annotations;clean code;analyzers</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<None Update="LICENSE.txt" Pack="true" PackagePath="" />
+		<None Update="LICENSE.GPL-3.txt" Pack="true" PackagePath="" />
+		<None Update="PackageIcon.png" Pack="true" PackagePath="" />
+		<None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
+		
+		<None Include="$(OutputPath)\CodeSmellAnnotations.Analyzers.dll" Pack="True" PackagePath="analyzers/dotnet/cs" Visible="false" />
+		<!-- add the attributes dll to the analyzer folder so that the analyzer will be able to find it -->
+		<None Include="$(OutputPath)\CodeSmellAnnotations.Attributes.dll" Pack="True" PackagePath="analyzers/dotnet/cs" Visible="false" />
+		<!-- add the attribute dll to the lib folder as well, so that it can be referenced from the consuming projects -->
+		<None Include="$(OutputPath)\CodeSmellAnnotations.Attributes.dll" Pack="True" PackagePath="lib\$(TargetFramework)" Visible="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Analyzers\CodeSmellAnnotations.Analyzers.csproj" />
+	  <ProjectReference Include="..\Attributes\CodeSmellAnnotations.Attributes.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0.0" PrivateAssets="all" />
+		<PackageReference Update="NETStandard.Library" PrivateAssets="all" />
+	</ItemGroup>
+
+</Project>
