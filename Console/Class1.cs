@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace CodeSmellAnnotations
 {
     [CodeSmell("empty interface")]
-    [DuplicateCode(Duplicates = nameof(Class1), Message = "test")]
+    [DuplicateCode(Duplicates = nameof(Class1), Reason = "test")]
+    [PrimitiveObsession(Reason = "test")]
+    [LeakyAbstraction(Reason = "exposes members")]
     internal interface ICodeSmellAnnotations
     {
 
@@ -30,6 +32,7 @@ namespace CodeSmellAnnotations
         }
 
         [CodeSmell("do not use fields")]
+        [SolidViolation(SolidPrinciple.OpenClosed, Reason = "don't know why")]
         private int a1;
 
         [CodeSmell("refactor property")]

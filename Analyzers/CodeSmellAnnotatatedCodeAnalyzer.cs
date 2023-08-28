@@ -15,7 +15,10 @@ namespace CodeSmellAnnotations.Analyzers
     {
         private static ImmutableArray<IRule> Rules = ImmutableArray.Create<IRule>(
             new CodeSmellAttributeRule(),
-            new DuplicateCodeAttributeRule());
+            new DuplicateCodeAttributeRule(),
+            new PrimitiveObsessionAttributeRule(),
+            new LeakyAbstractionAttributeRule(),
+            new SolidViolationAttributeRule());
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
             ImmutableArray.CreateRange(Rules.Select(r => r.Descriptor));
 

@@ -6,17 +6,17 @@ using System;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal class CodeSmellAttributeRule : IRule
+    internal class PrimitiveObsessionAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM001", 
-                "Code smell", 
-                "Code smell{0}", 
+            => new DiagnosticDescriptor("CSM003", 
+                "Primitive obsession",
+                "Primitive obsession{0}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
 
-        public Type TriggeringAttributeType => typeof(CodeSmellAttribute);
+        public Type TriggeringAttributeType => typeof(PrimitiveObsessionAttribute);
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {

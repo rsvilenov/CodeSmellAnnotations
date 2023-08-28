@@ -5,4 +5,8 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
-CSM001 | CodeSmell | Warning | CodeSmellAnnotationAnalyzer
+CSM001 | CodeSmell | Warning | Code smell
+CSM002 | CodeSmell | Warning | Duplicate code
+CSM003 | CodeSmell | Warning | Primitive obsession
+CSM004 | CodeSmell | Warning | Leaky abstraction
+CSM005 | CodeSmell | Warning | SOLID violation

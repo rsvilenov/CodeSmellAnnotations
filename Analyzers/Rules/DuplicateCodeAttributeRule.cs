@@ -10,8 +10,8 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     {
         public DiagnosticDescriptor Descriptor 
             => new DiagnosticDescriptor("CSM002", 
-                "Duplicate code!", 
-                "Duplcate code{0}", 
+                "Duplicate code", 
+                "Duplcate code.{0} {1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
@@ -20,11 +20,14 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {
-            var message = attributeSyntax.GetStringArgumentValue("Message");
+            var reason = attributeSyntax.GetStringArgumentValue("Reason");
             var duplicates = attributeSyntax.GetStringArgumentValue("Duplicates");
 
-            var diagnosticMessageArgument = string.IsNullOrEmpty(duplicates) && string.IsNullOrEmpty(message) ? null : $": {duplicates} {message}";
-            return new[] { diagnosticMessageArgument };
+            return new[] 
+            { 
+                string.IsNullOrEmpty(duplicates) ? null : $" Duplicates {duplicates}.", 
+                string.IsNullOrEmpty(duplicates) ? null : $" Reason: {reason}", 
+            };
         }
     }
 }

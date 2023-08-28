@@ -6,23 +6,23 @@ using System;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal class CodeSmellAttributeRule : IRule
+    internal class SolidViolationAttributeRule : IRule
     {
         public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("CSM001", 
-                "Code smell", 
-                "Code smell{0}", 
+            => new DiagnosticDescriptor("CSM005", 
+                "SOLID violation",
+                "Violates {0} SOLID principle {1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
 
-        public Type TriggeringAttributeType => typeof(CodeSmellAttribute);
+        public Type TriggeringAttributeType => typeof(SolidViolationAttribute);
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {
-            var message = attributeSyntax.GetStringArgumentValue();
-            var diagnosticMessageArgument = string.IsNullOrEmpty(message) ? null : $": {message}";
-            return new[] { diagnosticMessageArgument };
+            var violates = attributeSyntax.GetStringArgumentValue();
+            var reason = attributeSyntax.GetStringArgumentValue("Reason");
+            return new[] { violates, string.IsNullOrEmpty(reason) ? null : $": {reason}" };
         }
     }
 }

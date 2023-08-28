@@ -34,7 +34,12 @@ namespace CodeSmellAnnotations.Analyzers.Extensions
                 return null;
             }
 
-            return argumentSyntax.Expression.ToString();
+            if (argumentSyntax.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+            {
+                return memberAccessExpression.Name.Identifier.ValueText;
+            }
+            
+             return argumentSyntax.Expression.ToString();
             // return argumentSyntax.Expression.NormalizeWhitespace().ToFullString();
         }
     }
