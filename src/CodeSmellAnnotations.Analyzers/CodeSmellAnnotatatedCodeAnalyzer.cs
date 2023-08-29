@@ -29,6 +29,7 @@ namespace CodeSmellAnnotations.Analyzers
             context.RegisterSyntaxNodeAction(AnalyzeCodeSmellAttributes, 
                 SyntaxKind.PropertyDeclaration, 
                 SyntaxKind.ClassDeclaration,
+                SyntaxKind.MethodDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.ConstructorDeclaration,
@@ -84,6 +85,7 @@ namespace CodeSmellAnnotations.Analyzers
                 FieldDeclarationSyntax fieldDeclarationSyntax => fieldDeclarationSyntax.Declaration.GetLocation(),
                 ConstructorDeclarationSyntax constructorDeclarationSyntax => constructorDeclarationSyntax.Identifier.GetLocation(),
                 AccessorDeclarationSyntax accessorDeclarationSyntax => accessorDeclarationSyntax.Body.GetLocation(),
+                MethodDeclarationSyntax methodDeclarationSyntax => methodDeclarationSyntax.Identifier.GetLocation(),
                 _ => null,
             };
         }
