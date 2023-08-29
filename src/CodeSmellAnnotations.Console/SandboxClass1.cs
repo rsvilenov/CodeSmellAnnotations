@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CodeSmellAnnotations
 {
     [CodeSmell("empty interface")]
-    [DuplicateCode(Duplicates = nameof(Class1), Reason = "test")]
+    [DuplicateCode(Duplicates = nameof(SandboxClass1), Reason = "test")]
     [PrimitiveObsession(Reason = "test")]
     [LeakyAbstraction(Reason = "exposes members")]
     internal interface ICodeSmellAnnotations
@@ -17,12 +17,18 @@ namespace CodeSmellAnnotations
     }
 
     [CodeSmell("refactor")]
-    internal class Class1
+    internal class SandboxClass1
     {
         [CodeSmell("empty constructor")]
-        public Class1()
+        public SandboxClass1()
         {
             a1 = 1;
+        }
+
+        [CodeSmell("static method")]
+        public static void Run()
+        {
+
         }
 
         [CodeSmell("casing")]
