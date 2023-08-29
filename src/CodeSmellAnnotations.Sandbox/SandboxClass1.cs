@@ -41,7 +41,7 @@ namespace CodeSmellAnnotations
         private readonly int a1;
 
         //[CodeSmell("refactor property")]
-        [SolidViolation(SolidPrinciple.OpenClosed, Reason = "don't know why")]
+        [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = "don't know why")]
         public int MyProperty 
         {
             // [CodeSmell("refactor accessor")]

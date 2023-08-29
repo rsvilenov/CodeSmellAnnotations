@@ -5,7 +5,7 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
-SML001 | CodeSmell | Warning | Code smell
+SML001 | CodeSmell | Warning | CodeSmellAttributeRule, [Documentation](https://martinfowler.com/bliki/CodeSmell.html)
 SML002 | CodeSmell | Warning | Duplicate code
 SML003 | CodeSmell | Warning | Primitive obsession
 SML004 | CodeSmell | Warning | Leaky abstraction

@@ -8,13 +8,15 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 {
     internal class PrimitiveObsessionAttributeRule : IRule
     {
-        public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("SML003", 
+        private static readonly DiagnosticDescriptor _descriptor
+            = new DiagnosticDescriptor("SML003", 
                 "Primitive obsession",
                 "Primitive obsession{0}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
+
+        public DiagnosticDescriptor Descriptor => _descriptor;
 
         public Type TriggeringAttributeType => typeof(PrimitiveObsessionAttribute);
 

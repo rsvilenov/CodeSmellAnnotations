@@ -8,13 +8,15 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 {
     internal class LeakyAbstractionAttributeRule : IRule
     {
-        public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("SML004", 
+        private static readonly DiagnosticDescriptor _descriptor
+            = new DiagnosticDescriptor("SML004", 
                 "Leaky abstraction",
                 "Leaky abstraction{0}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
+
+        public DiagnosticDescriptor Descriptor => _descriptor;
 
         public Type TriggeringAttributeType => typeof(LeakyAbstractionAttribute);
 

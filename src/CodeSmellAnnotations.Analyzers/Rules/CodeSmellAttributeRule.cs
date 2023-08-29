@@ -8,13 +8,20 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 {
     internal class CodeSmellAttributeRule : IRule
     {
-        public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("SML001", 
+        // In order for the Roslyn's Release tracking analyzer to work,
+        // the descriptor should be a field and the full "new" expression
+        // should be used (the short one - new("SML00X",...) will break the analysis)
+        private static readonly DiagnosticDescriptor _descriptor 
+            = new DiagnosticDescriptor("SML001", 
                 "Code smell", 
                 "Code smell{0}", 
-                "CodeSmell", 
+                "CodeSmell",
                 DiagnosticSeverity.Warning, 
-                isEnabledByDefault: true);
+                isEnabledByDefault: true,
+                description: "General code smell annotation",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmell.md");
+
+        public DiagnosticDescriptor Descriptor => _descriptor;
 
         public Type TriggeringAttributeType => typeof(CodeSmellAttribute);
 

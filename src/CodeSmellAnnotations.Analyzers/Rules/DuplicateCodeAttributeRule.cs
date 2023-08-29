@@ -8,14 +8,15 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 {
     internal class DuplicateCodeAttributeRule : IRule
     {
-        public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("SML002", 
+        private static readonly DiagnosticDescriptor _descriptor
+            = new DiagnosticDescriptor("SML002", 
                 "Duplicate code", 
                 "Duplcate code.{0}{1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
 
+        public DiagnosticDescriptor Descriptor => _descriptor;
         public Type TriggeringAttributeType => typeof(DuplicateCodeAttribute);
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)

@@ -5,13 +5,18 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Attributes", "src\CodeSmellAnnotations.Attributes\CodeSmellAnnotations.Attributes.csproj", "{35599156-16DB-4FCC-A2AD-899F1CDED0B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Console", "src\CodeSmellAnnotations.Console\CodeSmellAnnotations.Console.csproj", "{3EA15C71-CF75-4D77-9809-0631688C367F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Sandbox", "src\CodeSmellAnnotations.Sandbox\CodeSmellAnnotations.Sandbox.csproj", "{3EA15C71-CF75-4D77-9809-0631688C367F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Package", "src\CodeSmellAnnotations.Package\CodeSmellAnnotations.Package.csproj", "{38FA7439-A296-4B47-86F5-2A8930484656}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Analyzers", "src\CodeSmellAnnotations.Analyzers\CodeSmellAnnotations.Analyzers.csproj", "{D0E3D557-631F-4DD1-9A66-E4DC602CA5C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSmellAnnotations.Tests", "CodeSmellAnnotations.Tests\CodeSmellAnnotations.Tests.csproj", "{62F6FB96-A5CB-43C5-84FD-A7E3FD60791D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Tests", "CodeSmellAnnotations.Tests\CodeSmellAnnotations.Tests.csproj", "{62F6FB96-A5CB-43C5-84FD-A7E3FD60791D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{BC30D4BC-4697-4235-8220-DF08AB58A061}"
+	ProjectSection(SolutionItems) = preProject
+		CodeSmell.md = CodeSmell.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

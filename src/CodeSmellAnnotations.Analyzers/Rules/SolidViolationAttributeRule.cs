@@ -8,13 +8,15 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 {
     internal class SolidViolationAttributeRule : IRule
     {
-        public DiagnosticDescriptor Descriptor 
-            => new DiagnosticDescriptor("SML005", 
+        private static readonly DiagnosticDescriptor _descriptor
+            = new DiagnosticDescriptor("SML005", 
                 "SOLID violation",
                 "Violates {0} SOLID principle{1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true);
+
+        public DiagnosticDescriptor Descriptor => _descriptor;
 
         public Type TriggeringAttributeType => typeof(SolidViolationAttribute);
 
