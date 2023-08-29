@@ -32,7 +32,6 @@
 		<None Update="LICENSE.txt" Pack="true" PackagePath="" />
 		<None Update="LICENSE.GPL-3.txt" Pack="true" PackagePath="" />
 		<None Update="PackageIcon.png" Pack="true" PackagePath="" />
-		<None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
 		
 		<None Include="$(OutputPath)\CodeSmellAnnotations.Analyzers.dll" Pack="True" PackagePath="analyzers/dotnet/cs" Visible="false" />
 		<!-- add the attributes dll to the analyzer folder so that the analyzer will be able to find it -->
@@ -42,8 +41,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Analyzers\CodeSmellAnnotations.Analyzers.csproj" />
-	  <ProjectReference Include="..\Attributes\CodeSmellAnnotations.Attributes.csproj" />
+	  <ProjectReference Include="..\CodeSmellAnnotations.Analyzers\CodeSmellAnnotations.Analyzers.csproj" />
+	  <ProjectReference Include="..\CodeSmellAnnotations.Attributes\CodeSmellAnnotations.Attributes.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Attributes\CodeSmellAnnotations.Attributes.csproj" OutputItemType="Analyzer"
+    <ProjectReference Include="..\CodeSmellAnnotations.Attributes\CodeSmellAnnotations.Attributes.csproj" OutputItemType="Analyzer"
                       SetTargetFramework="TargetFramework=netstandard2.0" />
 	  
 	  <!-- since we are referencing the analyzer here manually, we need to reference its dependencies in a manner taht will put them in the analyzer folder -->
-    <ProjectReference Include="..\Analyzers\CodeSmellAnnotations.Analyzers.csproj" OutputItemType="Analyzer"
+    <ProjectReference Include="..\CodeSmellAnnotations.Analyzers\CodeSmellAnnotations.Analyzers.csproj" OutputItemType="Analyzer"
                       SetTargetFramework="TargetFramework=netstandard2.0" PrivateAssets="all" />
   </ItemGroup>
 

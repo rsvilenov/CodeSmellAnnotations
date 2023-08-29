@@ -18,7 +18,7 @@
 
 
     <ItemGroup>
-      <ProjectReference Include="..\Attributes\CodeSmellAnnotations.Attributes.csproj" />
+      <ProjectReference Include="..\CodeSmellAnnotations.Attributes\CodeSmellAnnotations.Attributes.csproj" />
     </ItemGroup>
 
 </Project>
