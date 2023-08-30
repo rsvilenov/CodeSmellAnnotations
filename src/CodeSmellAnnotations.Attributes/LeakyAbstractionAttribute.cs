@@ -2,6 +2,10 @@
 
 namespace CodeSmellAnnotations.Attributes
 {
+    /// <summary>
+    /// <para>An annotation for leaky abstraction.</para>
+    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/LeakyAbstraction.md">Read more</see>
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property |
            AttributeTargets.Method |
            AttributeTargets.Class |

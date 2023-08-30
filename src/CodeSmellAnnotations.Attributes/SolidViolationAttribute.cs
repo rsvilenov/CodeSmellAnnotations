@@ -2,6 +2,10 @@
 
 namespace CodeSmellAnnotations.Attributes
 {
+    /// <summary>
+    /// <para>An annotation for code which violates one or more SOLID principle.</para>
+    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/SolidViolation.md">Read more</see>
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property |
         AttributeTargets.Method |
         AttributeTargets.Field |

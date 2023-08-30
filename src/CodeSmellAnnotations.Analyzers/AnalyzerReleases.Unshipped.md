@@ -6,7 +6,7 @@
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
 SML001 | CodeSmell | Warning | CodeSmellAttributeRule, [Documentation](https://martinfowler.com/bliki/CodeSmell.html)
-SML002 | CodeSmell | Warning | Duplicate code
-SML003 | CodeSmell | Warning | Primitive obsession
-SML004 | CodeSmell | Warning | Leaky abstraction
-SML005 | CodeSmell | Warning | SOLID violation
+SML002 | CodeSmell | Warning | DuplicateCodeAttributeRule, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/docs/DuplicateCode.md)
+SML003 | CodeSmell | Warning | PrimitiveObsessionAttributeRule, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/docs/PrimitiveObsession.md)
+SML004 | CodeSmell | Warning | LeakyAbstractionAttributeRule, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/docs/LeakyAbstraction.md)
+SML005 | CodeSmell | Warning | SolidViolationAttributeRule, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/docs/SolidViolation.md)

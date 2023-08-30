@@ -19,7 +19,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true,
                 description: "General code smell annotation",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmell.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/CodeSmell.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
 

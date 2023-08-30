@@ -2,6 +2,10 @@
 
 namespace CodeSmellAnnotations.Attributes
 {
+    /// <summary>
+    /// <para>An annotation for code which suffers from primitive obsession.</para>
+    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/DuplicateCode.md">Read more</see>
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property |
         AttributeTargets.Method | 
         AttributeTargets.Class | 

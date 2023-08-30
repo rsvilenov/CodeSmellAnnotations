@@ -14,7 +14,9 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "Violates {0} SOLID principle{1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
-                isEnabledByDefault: true);
+                isEnabledByDefault: true,
+                description: "Violation of SOLID principles",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/SolidViolation.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
 

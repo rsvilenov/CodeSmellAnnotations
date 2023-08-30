@@ -14,7 +14,9 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "Primitive obsession{0}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
-                isEnabledByDefault: true);
+                isEnabledByDefault: true,
+                description: "Primitive obsession",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/PrimitiveObsession.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
 

@@ -14,7 +14,9 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "Leaky abstraction{0}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
-                isEnabledByDefault: true);
+                isEnabledByDefault: true,
+                description: "Leaky abstraction",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/LeakyAbstraction.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
 
