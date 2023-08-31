@@ -18,7 +18,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CodeSmellAnnotations.Analyzers\CodeSmellAnnotations.Analyzers.csproj" />
+    <ProjectReference Include="..\CodeSmellAnnotations.Analyzers\CodeSmellAnnotations.Analyzers.csproj" />
   </ItemGroup>
 
 </Project>

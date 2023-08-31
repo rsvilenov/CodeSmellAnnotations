@@ -1,4 +1,5 @@
-﻿using CodeSmellAnnotations.Analyzers.Rules;
+﻿using CodeSmellAnnotations.Analyzers.Extensions;
+using CodeSmellAnnotations.Analyzers.Rules;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -12,15 +13,17 @@ namespace CodeSmellAnnotations.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CodeSmellAnnotatatedCodeAnalyzer : DiagnosticAnalyzer
     {
-        private static ImmutableArray<IRule> Rules = ImmutableArray.Create<IRule>(
+        private static readonly IRule[] _rules = new IRule[]
+        {
             new CodeSmellAttributeRule(),
             new DuplicateCodeAttributeRule(),
             new PrimitiveObsessionAttributeRule(),
             new LeakyAbstractionAttributeRule(),
-            new SolidViolationAttributeRule());
+            new SolidViolationAttributeRule()
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
-            ImmutableArray.CreateRange(Rules.Select(r => r.Descriptor));
+            ImmutableArray.CreateRange(_rules.Select(r => r.Descriptor));
 
         public override void Initialize(AnalysisContext context)
         {
@@ -50,11 +53,11 @@ namespace CodeSmellAnnotations.Analyzers
             var attributesSyntaxList = GetAttributes(context.Node);
             if (!attributesSyntaxList.Any()) return;
 
-            foreach (var rule in Rules)
+            foreach (var rule in _rules)
             {
                 var annotationAttributeType = context.SemanticModel.Compilation.GetTypeByMetadataName(rule.TriggeringAttributeType.FullName);
                 var attributeSyntaxMatch = attributesSyntaxList
-                    .FirstOrDefault(at => SymbolEqualityComparer.Default.Equals(context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType, annotationAttributeType));
+                    .FirstOrDefault(at => context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType.CompareTo(annotationAttributeType) ?? false);
                 
                 if (attributeSyntaxMatch == null) continue;
                 

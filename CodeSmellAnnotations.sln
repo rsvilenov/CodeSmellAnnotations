@@ -11,17 +11,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Packag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Analyzers", "src\CodeSmellAnnotations.Analyzers\CodeSmellAnnotations.Analyzers.csproj", "{D0E3D557-631F-4DD1-9A66-E4DC602CA5C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Tests", "CodeSmellAnnotations.Tests\CodeSmellAnnotations.Tests.csproj", "{62F6FB96-A5CB-43C5-84FD-A7E3FD60791D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeSmellAnnotations.Tests", "src\CodeSmellAnnotations.Tests\CodeSmellAnnotations.Tests.csproj", "{62F6FB96-A5CB-43C5-84FD-A7E3FD60791D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{BC30D4BC-4697-4235-8220-DF08AB58A061}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSmells", "CodeSmells", "{A0A18B06-7D65-4C4B-A197-2405FE7C9D88}"
 	ProjectSection(SolutionItems) = preProject
-		CodeSmell.md = CodeSmell.md
-		DuplicateCode.md = DuplicateCode.md
-		LeakyAbstraction.md = LeakyAbstraction.md
-		PrimitiveObsession.md = PrimitiveObsession.md
-		SolidViolation.md = SolidViolation.md
+		docs\CodeSmells\CodeSmell.md = docs\CodeSmells\CodeSmell.md
+		docs\CodeSmells\DuplicateCode.md = docs\CodeSmells\DuplicateCode.md
+		docs\CodeSmells\LeakyAbstraction.md = docs\CodeSmells\LeakyAbstraction.md
+		docs\CodeSmells\PrimitiveObsession.md = docs\CodeSmells\PrimitiveObsession.md
+		docs\CodeSmells\SolidViolation.md = docs\CodeSmells\SolidViolation.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F23A8BC1-3257-4DD1-9750-0A961F5EF4AC}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
