@@ -3,6 +3,7 @@ using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
@@ -11,7 +12,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptor
             = new DiagnosticDescriptor("SML005", 
                 "SOLID violation",
-                "Violates {0} SOLID principle{1}", 
+                "Violates the {0} principle{1}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true,
@@ -24,9 +25,23 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {
-            var violates = attributeSyntax.GetStringArgumentValue();
+            var violatesAttributeValue = attributeSyntax.GetStringArgumentValue();
+            if (!_solidPrincipleEnumStringToDisplayStringMapping.TryGetValue(violatesAttributeValue, out string principleDisplayString))
+            {
+                throw new InvalidOperationException($"{nameof(SolidPrinciple)} enum does not contain a member called {violatesAttributeValue}");
+            }
+
             var reason = attributeSyntax.GetStringArgumentValue("Reason");
-            return new[] { violates, string.IsNullOrEmpty(reason) ? null : $": {reason}" };
+            return new[] { principleDisplayString, string.IsNullOrEmpty(reason) ? null : $": {reason}" };
         }
+
+        private static Dictionary<string, string> _solidPrincipleEnumStringToDisplayStringMapping = new()
+        {
+            { nameof(SolidPrinciple.SingleResponsibility), "single responsibility" },
+            { nameof(SolidPrinciple.OpenClosed), "open/closed" },
+            { nameof(SolidPrinciple.Liskov), "Liskov substitution" },
+            { nameof(SolidPrinciple.InterfaceSegregation), "interface segregation" },
+            { nameof(SolidPrinciple.DependencyInversion), "dependency inversion" },
+        };
     }
 }
