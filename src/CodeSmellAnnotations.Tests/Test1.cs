@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
+using System.Threading.Tasks;
 using Xunit;
 using AnalyzerTest = Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerTest<CodeSmellAnnotations.Analyzers.CodeSmellAnnotatatedCodeAnalyzer, Microsoft.CodeAnalysis.Testing.Verifiers.XUnitVerifier>;
 
