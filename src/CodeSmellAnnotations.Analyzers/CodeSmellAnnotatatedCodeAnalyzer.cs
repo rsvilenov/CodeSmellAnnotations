@@ -60,7 +60,9 @@ namespace CodeSmellAnnotations.Analyzers
                     .FirstOrDefault(at => context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType.CompareTo(annotationAttributeType) ?? false);
                 
                 if (attributeSyntaxMatch == null) continue;
-                
+                if (context.Compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0592")) return;
+
+
                 context.ReportDiagnostic(
                     Diagnostic.Create(rule.Descriptor,
                         location,
@@ -87,7 +89,7 @@ namespace CodeSmellAnnotations.Analyzers
                 PropertyDeclarationSyntax propertyDeclarationSyntax => propertyDeclarationSyntax.Identifier.GetLocation(),
                 FieldDeclarationSyntax fieldDeclarationSyntax => fieldDeclarationSyntax.Declaration.GetLocation(),
                 ConstructorDeclarationSyntax constructorDeclarationSyntax => constructorDeclarationSyntax.Identifier.GetLocation(),
-                AccessorDeclarationSyntax accessorDeclarationSyntax => accessorDeclarationSyntax.Body.GetLocation(),
+                AccessorDeclarationSyntax accessorDeclarationSyntax => accessorDeclarationSyntax.Body?.GetLocation() ?? accessorDeclarationSyntax.GetLocation(),
                 MethodDeclarationSyntax methodDeclarationSyntax => methodDeclarationSyntax.Identifier.GetLocation(),
                 _ => null,
             };

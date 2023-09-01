@@ -29,7 +29,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
             return new[] 
             { 
                 string.IsNullOrEmpty(duplicates) ? null : $" Duplicates {duplicates}.", 
-                string.IsNullOrEmpty(duplicates) ? null : $" Reason: {reason}", 
+                string.IsNullOrEmpty(reason) ? null : $" Reason: {reason}", 
             };
         }
     }

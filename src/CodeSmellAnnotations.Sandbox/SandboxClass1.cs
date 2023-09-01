@@ -17,9 +17,10 @@ namespace CodeSmellAnnotations
     }
 
     [CodeSmell("refactor")]
+    [DuplicateCode(Reason = "test")]
     internal class SandboxClass1
     {
-        [CodeSmell("empty constructor")]
+        [CodeSmell(Reason = "empty constructor")]
         public SandboxClass1()
         {
             a1 = 1;
@@ -37,6 +38,10 @@ namespace CodeSmellAnnotations
 
         }
 
+
+        [CodeSmell("do not use auto properties")]
+        public int MyAutoProperty { get; set; }
+
         [CodeSmell("do not use fields")]
         private readonly int a1;
 
@@ -44,7 +49,7 @@ namespace CodeSmellAnnotations
         [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = "don't know why")]
         public int MyProperty 
         {
-            // [CodeSmell("refactor accessor")]
+            [CodeSmell("refactor accessor")]
             get 
             { 
                 return a1; 
