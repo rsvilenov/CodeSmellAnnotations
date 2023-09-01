@@ -17,7 +17,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true,
                 description: "Violation of SOLID principles",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/SolidViolation.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
 

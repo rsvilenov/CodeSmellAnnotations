@@ -16,7 +16,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true,
                 description: "Primitive obsession",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/PrimitiveObsession.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML003.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
 

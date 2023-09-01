@@ -35,7 +35,7 @@ namespace CodeSmellAnnotations.Tests
             test.TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(typeof(CodeSmellAnnotations.Analyzers.CodeSmellAnnotatatedCodeAnalyzer).Assembly.Location));
             test.ExpectedDiagnostics.Add(new DiagnosticResult(
                 "SML001",
-                Microsoft.CodeAnalysis.DiagnosticSeverity.Warning)
+                DiagnosticSeverity.Warning)
                 .WithSpan(10, 32, 10, 44).WithArguments(": \"test\""));
             //test.ExpectedDiagnostics.Add(
             //    Verify.Diagnostic(new CodeSmellAnnotations.Analyzers.Rules.CodeSmellAttributeRule().Descriptor));

@@ -16,7 +16,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true,
                 description: "Duplicate code",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/DuplicateCode.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML002.md");
 
         public DiagnosticDescriptor Descriptor => _descriptor;
         public Type TriggeringAttributeType => typeof(DuplicateCodeAttribute);
