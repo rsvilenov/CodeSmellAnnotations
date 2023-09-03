@@ -7,53 +7,51 @@ using System.Threading.Tasks;
 
 namespace CodeSmellAnnotations
 {
-    [CodeSmell("empty interface")]
-    [DuplicateCode(Duplicates = nameof(SandboxClass1), Reason = "test")]
-    [PrimitiveObsession(Reason = "test")]
-    [LeakyAbstraction(Reason = "exposes members")]
+    [CodeSmell(Kind.InconsistentNaming)]
+    [DuplicatedCode(Duplicates = "t", Reason = "test")]
     internal interface ICodeSmellAnnotations
     {
 
     }
 
-    [CodeSmell("refactor")]
-    [DuplicateCode(Reason = "test")]
+    [CodeSmell(Kind.General, Reason = "refactor")]
+    [DuplicatedCode(Reason = "test")]
     internal class SandboxClass1
     {
-        [CodeSmell(Reason = "empty constructor")]
+        //[CodeSmell("empty constructor", Kind.InconsistentNaming)]
         public SandboxClass1()
         {
             a1 = 1;
         }
 
-        [CodeSmell("static method")]
+        [CodeSmell(Kind.HiddenBehavior, Reason = "static method")]
         public static void Run()
         {
 
         }
 
-        [CodeSmell("casing")]
+        [CodeSmell(Kind.General, Reason = "casing")]
         struct struct1
         {
 
         }
 
 
-        [CodeSmell("do not use auto properties")]
+        [CodeSmell(Kind.General, Reason = "do not use auto properties")]
         public int MyAutoProperty { get; set; }
 
-        [CodeSmell("do not use fields")]
+        [CodeSmell(Kind.PrimitiveObsession, Reason = "do not use fields")]
         private readonly int a1;
 
         //[CodeSmell("refactor property")]
         [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = "don't know why")]
-        public int MyProperty 
+        public int MyProperty
         {
-            [CodeSmell("refactor accessor")]
-            get 
-            { 
-                return a1; 
-            } 
+            [CodeSmell(Kind.General, Reason = "refactor accessor")]
+            get
+            {
+                return a1;
+            }
         }
     }
 }

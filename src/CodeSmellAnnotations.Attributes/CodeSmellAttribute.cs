@@ -15,10 +15,11 @@ namespace CodeSmellAnnotations.Attributes
         AttributeTargets.Struct)]
     public class CodeSmellAttribute : Attribute
     {
+        public Kind Kind { get; set; }
         public string Reason { get; set; }
-        public CodeSmellAttribute(string reason = null)
+        public CodeSmellAttribute(Kind kind)
         {
-            Reason = reason;
+            Kind = kind;
         }
     }
 }

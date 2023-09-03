@@ -19,7 +19,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [CodeSmell]
+                    [CodeSmell(""reason"")]
                     public class SomeClass
                     {
                     }
@@ -29,6 +29,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
+                    .WithArguments(@": ""reason""")
             });
         }
 
@@ -43,7 +44,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell]
+                        [CodeSmell(""reason"")]
                         public SomeClass()
                         {
                         }
@@ -54,6 +55,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 32, 10, 41)
+                    .WithArguments(@": ""reason""")
             });
         }
 
@@ -68,7 +70,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell]
+                        [CodeSmell(""reason"")]
                         private string _field;
                     }
                 }";
@@ -77,6 +79,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
+                    .WithArguments(@": ""reason""")
             });
         }
 
@@ -91,7 +94,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell]
+                        [CodeSmell(""reason"")]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
@@ -100,6 +103,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
+                    .WithArguments(@": ""reason""")
             });
         }
 
@@ -114,7 +118,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell]
+                        [CodeSmell(""reason"")]
                         public bool IsTrue 
                         {
                             get
@@ -130,6 +134,7 @@ namespace CodeSmellAnnotations.Tests
                 
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 43)
+                    .WithArguments(@": ""reason""")
             });
         }
 
@@ -146,7 +151,7 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [CodeSmell]
+                            [CodeSmell(""reason"")]
                             get
                             {
                                 return false;
@@ -159,51 +164,6 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(13, 29, 15, 30)
-            });
-        }
-
-        [Fact]
-        public async Task CodeSmellAttribute_WithReasonArgument_DiagnosticsWithMessage_Expected()
-        {
-            string testCode = @"
-                using System;
-                using CodeSmellAnnotations.Attributes;
-
-                namespace TestApp
-                {
-                    [CodeSmell(Reason = ""reason"")]
-                    public class SomeClass
-                    {
-                    }
-                }";
-
-            await Verify(testCode, new List<DiagnosticResult>
-            {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
-                    .WithSpan(8, 34, 8, 43)
-                    .WithArguments(@": ""reason""")
-            });
-        }
-
-        [Fact]
-        public async Task CodeSmellAttribute_WithConstructorArgument_DiagnosticsWithMessage_Expected()
-        {
-            string testCode = @"
-                using System;
-                using CodeSmellAnnotations.Attributes;
-
-                namespace TestApp
-                {
-                    [CodeSmell(""reason"")]
-                    public class SomeClass
-                    {
-                    }
-                }";
-
-            await Verify(testCode, new List<DiagnosticResult>
-            {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
-                    .WithSpan(8, 34, 8, 43)
                     .WithArguments(@": ""reason""")
             });
         }

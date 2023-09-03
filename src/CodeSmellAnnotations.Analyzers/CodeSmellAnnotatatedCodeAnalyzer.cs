@@ -16,9 +16,7 @@ namespace CodeSmellAnnotations.Analyzers
         private static readonly IRule[] _rules = new IRule[]
         {
             new CodeSmellAttributeRule(),
-            new DuplicateCodeAttributeRule(),
-            new PrimitiveObsessionAttributeRule(),
-            new LeakyAbstractionAttributeRule(),
+            new DuplicatedCodeAttributeRule(),
             new SolidViolationAttributeRule()
         };
 
@@ -61,7 +59,6 @@ namespace CodeSmellAnnotations.Analyzers
                 
                 if (attributeSyntaxMatch == null) continue;
                 if (context.Compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0592")) return;
-
 
                 context.ReportDiagnostic(
                     Diagnostic.Create(rule.Descriptor,

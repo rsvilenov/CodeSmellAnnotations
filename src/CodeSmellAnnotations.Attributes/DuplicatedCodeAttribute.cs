@@ -13,7 +13,7 @@ namespace CodeSmellAnnotations.Attributes
               AttributeTargets.Constructor |
               AttributeTargets.Interface |
               AttributeTargets.Struct)]
-    public class DuplicateCodeAttribute : Attribute
+    public class DuplicatedCodeAttribute : Attribute
     {
         public string Duplicates { get; set; }
         public string Reason { get; set; }

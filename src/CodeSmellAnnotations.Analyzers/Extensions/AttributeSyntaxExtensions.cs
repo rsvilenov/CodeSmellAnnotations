@@ -6,7 +6,19 @@ namespace CodeSmellAnnotations.Analyzers.Extensions
 {
     internal static class AttributeSyntaxExtensions
     {
-        public static string GetStringArgumentValue(this AttributeSyntax attributeSyntax, string name = null)
+        public static string GetArgumentValueAsString(this AttributeSyntax attributeSyntax, int argumentIndex)
+        {
+            var argumentSyntax = attributeSyntax
+                ?.ArgumentList
+                ?.Arguments
+                .ElementAtOrDefault(argumentIndex);
+
+            if (argumentSyntax == null) return null;
+
+            return GetArgumentValueAsString(argumentSyntax);
+        }
+
+        public static string GetArgumentValueAsString(this AttributeSyntax attributeSyntax, string name)
         {
             var argumentSyntax = attributeSyntax
                 ?.ArgumentList
@@ -15,16 +27,21 @@ namespace CodeSmellAnnotations.Analyzers.Extensions
 
             if (argumentSyntax == null) return null;
 
-            if (argumentSyntax.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-                return memberAccessExpression.Name.Identifier.ValueText;
-
-            return argumentSyntax.Expression.ToString();
+            return GetArgumentValueAsString(argumentSyntax);
 
             /* 
                 var argumentValue = semanticModel.GetConstantValue(argumentSyntax.Expression).Value;
 
                 var argumentName = argumentSyntax.Expression.NormalizeWhitespace().ToFullString();
             */
+        }
+
+        private static string GetArgumentValueAsString(AttributeArgumentSyntax argumentSyntax)
+        {
+            if (argumentSyntax.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+                return memberAccessExpression.Name.Identifier.ValueText;
+
+            return argumentSyntax.Expression.ToString();
         }
 
         private static string GetArgumentName(AttributeArgumentSyntax a)

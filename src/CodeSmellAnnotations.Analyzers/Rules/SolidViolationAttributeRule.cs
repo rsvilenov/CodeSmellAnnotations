@@ -25,13 +25,13 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 
         public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
         {
-            var violatesAttributeValue = attributeSyntax.GetStringArgumentValue();
+            var violatesAttributeValue = attributeSyntax.GetArgumentValueAsString(0);
             if (!_solidPrincipleEnumStringToDisplayStringMapping.TryGetValue(violatesAttributeValue, out string principleDisplayString))
             {
                 throw new InvalidOperationException($"{nameof(SolidPrinciple)} enum does not contain a member called {violatesAttributeValue}");
             }
 
-            var reason = attributeSyntax.GetStringArgumentValue("Reason");
+            var reason = attributeSyntax.GetArgumentValueAsString("Reason");
             return new[] { principleDisplayString, string.IsNullOrEmpty(reason) ? null : $": {reason}" };
         }
 
