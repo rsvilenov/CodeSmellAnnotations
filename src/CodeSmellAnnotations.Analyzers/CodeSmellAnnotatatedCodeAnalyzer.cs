@@ -21,7 +21,7 @@ namespace CodeSmellAnnotations.Analyzers
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
-            ImmutableArray.CreateRange(_rules.Select(r => r.Descriptor));
+            ImmutableArray.CreateRange(_rules.SelectMany(r => r.Descriptors));
 
         public override void Initialize(AnalysisContext context)
         {
@@ -61,11 +61,12 @@ namespace CodeSmellAnnotations.Analyzers
                 if (context.Compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0592")) return;
 
                 var arguments = GetAttributeArguments(attributeSyntaxMatch, context.SemanticModel);
+                var diagnosis = rule.GetDiagnosis(arguments);
 
                 context.ReportDiagnostic(
-                    Diagnostic.Create(rule.Descriptor,
+                    Diagnostic.Create(diagnosis.Descriptor,
                         location,
-                        rule.GetDiagnosticMessageArguments(arguments)));
+                        diagnosis.DiagnosticMessageArguments));
             }
         }
 

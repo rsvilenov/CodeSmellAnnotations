@@ -5,7 +5,7 @@
         /// <summary>
         /// The code fully duplicate another piece of code/funcionality
         /// </summary>
-        FullDuplication,
+        General,
 
         /// <summary>
         /// A duplicate solution of the same problem. 
