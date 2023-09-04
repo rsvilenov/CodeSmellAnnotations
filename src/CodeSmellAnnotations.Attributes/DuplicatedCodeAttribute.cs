@@ -15,6 +15,7 @@ namespace CodeSmellAnnotations.Attributes
               AttributeTargets.Struct)]
     public class DuplicatedCodeAttribute : Attribute
     {
+        public DuplicationKind Kind { get; set; }
         public string Duplicates { get; set; }
         public string Reason { get; set; }
     }

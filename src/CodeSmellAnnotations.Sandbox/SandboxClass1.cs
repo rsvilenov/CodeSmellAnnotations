@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CodeSmellAnnotations
 {
     [CodeSmell(Kind.InconsistentNaming)]
-    [DuplicatedCode(Duplicates = "t", Reason = "test")]
+    [DuplicatedCode(Duplicates = "t", Kind = DuplicationKind.OddballSolution, Reason = "test")]
     internal interface ICodeSmellAnnotations
     {
 
