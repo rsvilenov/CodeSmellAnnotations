@@ -1,9 +1,9 @@
 ﻿using CodeSmellAnnotations.Analyzers.Extensions;
 using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
@@ -11,8 +11,8 @@ namespace CodeSmellAnnotations.Analyzers.Rules
     {
         private static readonly DiagnosticDescriptor _descriptor
             = new DiagnosticDescriptor("SML002", 
-                "Duplicate code", 
-                "Duplcate code.{0}{1}{2}", 
+                "Duplicated code", 
+                "Duplcated code.{0}{1}{2}", 
                 "CodeSmell", 
                 DiagnosticSeverity.Warning, 
                 isEnabledByDefault: true,
@@ -22,15 +22,22 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         public DiagnosticDescriptor Descriptor => _descriptor;
         public Type TriggeringAttributeType => typeof(DuplicatedCodeAttribute);
 
-        public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
+        public string[] GetDiagnosticMessageArguments(IEnumerable<AttributeArgument> attributeArguments)
         {
-            var reason = attributeSyntax.GetArgumentValueAsString("Reason");
-            var duplicates = attributeSyntax.GetArgumentValueAsString("Duplicates");
-            var kind = attributeSyntax.GetArgumentValueAsString("Kind");
+            var reason = attributeArguments.FirstOrDefault(a => a.Name == "Reason")?.Value?.ToString();
+            
+            var duplicates = attributeArguments.FirstOrDefault(a => a.Name == "Duplicates")?.Value?.ToString();
+
             string kindDisplayString = null;
-            if (kind != null && !_duplicationKindEnumStringToDisplayStringMapping.TryGetValue(kind, out kindDisplayString))
+            var kind = attributeArguments.FirstOrDefault(a => a.Name == "Kind");
+            if (kind != null)
             {
-                throw new InvalidOperationException($"{nameof(Kind)} enum does not contain a member called {kind}");
+                var kindEnumValue = kind.GetEnumValue<DuplicationKind>();
+
+                if (kind != null && !_duplicationKindEnumStringToDisplayStringMapping.TryGetValue(kindEnumValue, out kindDisplayString))
+                {
+                    throw new InvalidOperationException($"{nameof(Kind)} enum does not contain a member called {kind}");
+                }
             }
 
             return new[] 
@@ -41,10 +48,10 @@ namespace CodeSmellAnnotations.Analyzers.Rules
             };
         }
 
-        private static Dictionary<string, string> _duplicationKindEnumStringToDisplayStringMapping = new()
+        private static Dictionary<DuplicationKind, string> _duplicationKindEnumStringToDisplayStringMapping = new()
         {
-            { nameof(DuplicationKind.FullDuplication), "full duplication" },
-            { nameof(DuplicationKind.OddballSolution), "oddball solution" }
+            { DuplicationKind.FullDuplication, "full duplication" },
+            { DuplicationKind.OddballSolution, "oddball solution" }
         };
     }
 }

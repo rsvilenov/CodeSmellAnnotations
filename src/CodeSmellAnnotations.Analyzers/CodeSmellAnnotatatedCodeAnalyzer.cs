@@ -60,11 +60,31 @@ namespace CodeSmellAnnotations.Analyzers
                 if (attributeSyntaxMatch == null) continue;
                 if (context.Compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0592")) return;
 
+                var arguments = GetAttributeArguments(attributeSyntaxMatch, context.SemanticModel);
+
                 context.ReportDiagnostic(
                     Diagnostic.Create(rule.Descriptor,
                         location,
-                        rule.GetDiagnosticMessageArguments(attributeSyntaxMatch)));
-                
+                        rule.GetDiagnosticMessageArguments(arguments)));
+            }
+        }
+
+        private static IEnumerable<AttributeArgument> GetAttributeArguments(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
+        {
+            var arguments = attributeSyntax.ArgumentList?.Arguments;
+            if (arguments == null) yield break;
+            
+            int index = 0;
+            foreach (AttributeArgumentSyntax attributeArgumentSyntax in arguments)
+            {
+                var argumentValue = semanticModel.GetConstantValue(attributeArgumentSyntax.Expression).Value;
+                var argumentName = attributeArgumentSyntax.GetArgumentName();
+                yield return new AttributeArgument
+                {
+                    Name = argumentName,
+                    Value = argumentValue,
+                    Index = index++
+                };
             }
         }
 

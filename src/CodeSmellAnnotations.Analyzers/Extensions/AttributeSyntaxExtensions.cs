@@ -44,7 +44,7 @@ namespace CodeSmellAnnotations.Analyzers.Extensions
             return argumentSyntax.Expression.ToString();
         }
 
-        private static string GetArgumentName(AttributeArgumentSyntax a)
+        public static string GetArgumentName(this AttributeArgumentSyntax a)
         {
             return a.NameColon?.Name?.ToString() ?? a.NameEquals?.Name?.ToString();
         }

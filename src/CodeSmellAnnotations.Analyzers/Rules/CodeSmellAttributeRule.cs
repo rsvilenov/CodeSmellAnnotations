@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
@@ -26,15 +27,22 @@ namespace CodeSmellAnnotations.Analyzers.Rules
 
         public Type TriggeringAttributeType => typeof(CodeSmellAttribute);
 
-        public string[] GetDiagnosticMessageArguments(AttributeSyntax attributeSyntax)
+        public string[] GetDiagnosticMessageArguments(IEnumerable<AttributeArgument> attributeArguments)
         {
-            var kindAttributeValue = attributeSyntax.GetArgumentValueAsString(0);
-            if (!_kindEnumStringToDisplayStringMapping.TryGetValue(kindAttributeValue, out string kindDisplayString))
+            var kindAttributeValue = attributeArguments.ElementAtOrDefault(0);
+            if (kindAttributeValue == null)
             {
-                throw new InvalidOperationException($"{nameof(Kind)} enum does not contain a member called {kindAttributeValue}");
+                throw new InvalidOperationException($"Could not get the 'Kind' parameter value.");
             }
 
-            var reason = attributeSyntax.GetArgumentValueAsString("Reason");
+            var kindEnumValue = kindAttributeValue.GetEnumValue<Kind>();
+
+            if (!_kindEnumStringToDisplayStringMapping.TryGetValue(kindEnumValue, out string kindDisplayString))
+            {
+                throw new InvalidOperationException($"{nameof(Kind)} enum does not contain a member called {kindEnumValue}");
+            }
+
+            var reason = attributeArguments.FirstOrDefault(a => a.Name == "Reason")?.Value?.ToString();
 
             return new[] 
             {
@@ -42,26 +50,25 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 string.IsNullOrEmpty(reason) ? null : $". {reason}" 
             };
         }
-    
 
-        private static Dictionary<string, string> _kindEnumStringToDisplayStringMapping = new()
+        private static Dictionary<Kind, string> _kindEnumStringToDisplayStringMapping = new()
         {
-            { nameof(Kind.General), "Code smell" },
-            { nameof(Kind.InappropriateIntimacy), "Inappropriate intimacy" },
-            { nameof(Kind.LekyAbstraction), "Leaky abastraction" },
-            { nameof(Kind.SpeculativeGenerality), "Speculative generality" },
-            { nameof(Kind.IndecentExposure), "Indecent exposure" },
-            { nameof(Kind.VerticalSeparation), "Vertical separation" },
-            { nameof(Kind.MagicNumbers), "Magic numbers" },
-            { nameof(Kind.BloatedConstructor), "Bloated constructor" },
-            { nameof(Kind.FeatureEnvy), "Feature envy" },
-            { nameof(Kind.HiddenBehavior), "Hidden behavior" },
-            { nameof(Kind.DataClump), "Data clump" },
-            { nameof(Kind.InconsistentNaming), "Inconsistent naming" },
-            { nameof(Kind.UncommunicativeNaming), "Uncommunicative naming" },
-            { nameof(Kind.FallaciousNaming), "Fallacious naming" },
-            { nameof(Kind.TemporalCoupling), "Temporal coupling" },
-            { nameof(Kind.PrimitiveObsession), "Primitive obsession" },
+            { Kind.General, "Code smell" },
+            { Kind.InappropriateIntimacy, "Inappropriate intimacy" },
+            { Kind.LekyAbstraction, "Leaky abastraction" },
+            { Kind.SpeculativeGenerality, "Speculative generality" },
+            { Kind.IndecentExposure, "Indecent exposure" },
+            { Kind.VerticalSeparation, "Vertical separation" },
+            { Kind.MagicNumbers, "Magic numbers" },
+            { Kind.BloatedConstructor, "Bloated constructor" },
+            { Kind.FeatureEnvy, "Feature envy" },
+            { Kind.HiddenBehavior, "Hidden behavior" },
+            { Kind.DataClump, "Data clump" },
+            { Kind.InconsistentNaming, "Inconsistent naming" },
+            { Kind.UncommunicativeNaming, "Uncommunicative naming" },
+            { Kind.FallaciousNaming, "Fallacious naming" },
+            { Kind.TemporalCoupling, "Temporal coupling" },
+            { Kind.PrimitiveObsession, "Primitive obsession" },
         };
     }
 }
