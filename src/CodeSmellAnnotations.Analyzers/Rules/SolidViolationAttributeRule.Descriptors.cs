@@ -1,8 +1,6 @@
 ﻿using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
@@ -11,7 +9,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML201
                = new DiagnosticDescriptor("SML201",
                    "SOLID violation",
-                   "Single responsibility principle violation{0}",
+                   "SOLID violation: single responsibility principle. {0}",
                    "CodeSmell",
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
@@ -21,7 +19,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML202
                = new DiagnosticDescriptor("SML202",
                    "SOLID violation",
-                   "Open/closed principle violation{0}",
+                   "SOLID violation: open/closed principle. {0}",
                    "CodeSmell",
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
@@ -31,7 +29,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML203
                = new DiagnosticDescriptor("SML203",
                    "SOLID violation",
-                   "Liskov substitution principle violation{0}",
+                   "SOLID violation: liskov substitution principle. {0}",
                    "CodeSmell",
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
@@ -41,7 +39,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML204
                = new DiagnosticDescriptor("SML204",
                    "SOLID violation",
-                   "Interface segregation principle violation{0}",
+                   "SOLID violation: interface segregation principle. {0}",
                    "CodeSmell",
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
@@ -51,7 +49,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML205
                = new DiagnosticDescriptor("SML205",
                    "SOLID violation",
-                   "Dependency inversion principle violation{0}",
+                   "SOLID violation: dependency inversion principle. {0}",
                    "CodeSmell",
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,

@@ -11,21 +11,21 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML100
             = new DiagnosticDescriptor("SML100",
                 "Duplicated code",
-                "{0}{1}{2}",
+                "Duplicated code. {0}{1}",
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Duplicate code",
+                description: "Duplicated code",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML002.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML101
             = new DiagnosticDescriptor("SML101",
                 "Duplicated code",
-                "{0}{1}{2}",
+                "Oddball solution. {0}{1}",
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Duplicate code",
+                description: "Duplicated code",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML002.md");
 
 

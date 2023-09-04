@@ -18,11 +18,10 @@ namespace CodeSmellAnnotations.Analyzers.Rules
             
             var reason = attributeArguments.FirstOrDefault(a => a.Name == "Reason")?.Value?.ToString();
 
-            var diagnosticMessageArguments = new[] { string.IsNullOrEmpty(reason) ? null : $": {reason}" };
             return new Diagnosis
             {
                 Descriptor = GetDescriptorForPrinciple(violatesEnumValue),
-                DiagnosticMessageArguments = diagnosticMessageArguments
+                DiagnosticMessageArguments = new [] { reason }
             };
         }
     }
