@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using CodeSmellAnnotations.Attributes;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,12 +7,13 @@ using Xunit;
 
 namespace CodeSmellAnnotations.Tests
 {
-    public class DuplicateCodeAttributeAnalysisTest : AnalyzerTestBase
+    public class DuplicatedCodeAttributeAnalysisTest : AnalyzerTestBase
     {
-        private const string _diagnosticId = "SML002";
+        private const string _duplicationDiagnosticId = "SML100";
+        private const string _oddballSolutionDiagnosticId = "SML101";
 
         [Fact]
-        public async Task DuplicateCodeAttribute_OnClass_Diagnostics_Expected()
+        public async Task DuplicatedCodeAttribute_OnClass_Diagnostics_Expected()
         {
             const string testCode = @"
                 using System;
@@ -19,7 +21,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicateCode]
+                    [DuplicatedCode]
                     public class SomeClass
                     {
                     }
@@ -27,13 +29,13 @@ namespace CodeSmellAnnotations.Tests
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_OnConstructor_Diagnostics_Expected()
+        public async Task DuplicatedCodeAttribute_OnConstructor_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -43,22 +45,24 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicateCode]
+                        [DuplicatedCode]
                         public SomeClass()
                         {
                         }
+                    
+                        public int Property1 { get; set; }
                     }
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 32, 10, 41)
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_OnField_Diagnostics_Expected()
+        public async Task DuplicatedCodeAttribute_OnField_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -68,20 +72,20 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicateCode]
+                        [DuplicatedCode]
                         private string _field;
                     }
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_OnAutoProperty_Diagnostics_Expected()
+        public async Task DuplicatedCodeAttribute_OnAutoProperty_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -91,20 +95,20 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicateCode]
+                        [DuplicatedCode]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_OnProperty_Diagnostics_Expected()
+        public async Task DuplicatedCodeAttribute_OnProperty_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -114,7 +118,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicateCode]
+                        [DuplicatedCode]
                         public bool IsTrue 
                         {
                             get
@@ -122,19 +126,23 @@ namespace CodeSmellAnnotations.Tests
                                 return false;
                             }
                         }
+                        
+                        
+
+                        public int Property1 { get; set; }
                     }
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 43)
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_OnAccessor_Diagnostics_Expected()
+        public async Task DuplicatedCodeAttribute_OnAccessor_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -146,7 +154,7 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [DuplicateCode]
+                            [DuplicatedCode]
                             get
                             {
                                 return false;
@@ -157,13 +165,13 @@ namespace CodeSmellAnnotations.Tests
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(13, 29, 15, 30)
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_WithReasonArgument_DiagnosticsWithMessage_Expected()
+        public async Task DuplicatedCodeAttribute_WithReasonArgument_DiagnosticsWithMessage_Expected()
         {
             string testCode = @"
                 using System;
@@ -171,7 +179,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicateCode(Reason = ""reason"")]
+                    [DuplicatedCode(Reason = ""reason"")]
                     public class SomeClass
                     {
                     }
@@ -179,14 +187,14 @@ namespace CodeSmellAnnotations.Tests
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
-                    .WithArguments("", @" Reason: ""reason""")
+                    .WithArguments("", @" reason")
             });
         }
 
         [Fact]
-        public async Task DuplicateCodeAttribute_WithDuplicatesArgument_DiagnosticsWithMessage_Expected()
+        public async Task DuplicatedCodeAttribute_WithDuplicatesArgument_DiagnosticsWithMessage_Expected()
         {
             string testCode = @"
                 using System;
@@ -194,17 +202,46 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicateCode(Duplicates = ""OtherClass"")]
+                    [DuplicatedCode(Duplicates = ""OtherClass"")]
                     public class SomeClass
                     {
+                        private int _fld;
                     }
+
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
-                    .WithArguments(@" Duplicates ""OtherClass"".", "")
+                    .WithArguments(@"Duplicates OtherClass.", "")
+            });
+        }
+
+
+        [Theory]
+        [InlineData(DuplicationKind.General, _duplicationDiagnosticId)]
+        [InlineData(DuplicationKind.OddballSolution, _oddballSolutionDiagnosticId)]
+        public async Task DuplicatedCodeAttribute_WithKindArgument_Diagnostics_Expected(DuplicationKind kind, string diagnosticId)
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [DuplicatedCode(Kind = DuplicationKind." + kind.ToString() + @")]
+                    public class SomeClass
+                    {
+                        private int _fld;
+                    }
+
+                }";
+
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult(diagnosticId, DiagnosticSeverity.Warning)
+                    .WithSpan(8, 34, 8, 43)
             });
         }
     }
