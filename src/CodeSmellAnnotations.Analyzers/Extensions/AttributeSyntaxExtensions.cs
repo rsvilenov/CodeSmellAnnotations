@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Extensions
@@ -28,12 +27,6 @@ namespace CodeSmellAnnotations.Analyzers.Extensions
             if (argumentSyntax == null) return null;
 
             return GetArgumentValueAsString(argumentSyntax);
-
-            /* 
-                var argumentValue = semanticModel.GetConstantValue(argumentSyntax.Expression).Value;
-
-                var argumentName = argumentSyntax.Expression.NormalizeWhitespace().ToFullString();
-            */
         }
 
         private static string GetArgumentValueAsString(AttributeArgumentSyntax argumentSyntax)

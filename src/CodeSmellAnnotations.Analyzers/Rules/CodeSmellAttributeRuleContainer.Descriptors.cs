@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class CodeSmellAttributeRule : IHaveDescriptors
+    internal partial class CodeSmellAttributeRuleContainer
     {
         public DiagnosticDescriptor[] Descriptors => _descriptors;
 

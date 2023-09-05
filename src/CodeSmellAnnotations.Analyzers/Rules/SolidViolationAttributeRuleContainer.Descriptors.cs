@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class SolidViolationAttributeRule : IHaveDescriptors
+    internal partial class SolidViolationAttributeRuleContainer
     {
         private static readonly DiagnosticDescriptor _descriptorSML201
                = new DiagnosticDescriptor("SML201",

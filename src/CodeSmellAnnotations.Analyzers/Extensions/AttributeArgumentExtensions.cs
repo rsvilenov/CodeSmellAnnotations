@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Extensions
 {
     internal static class AttributeArgumentExtensions
     {
-
         public static TEnum GetEnumValue<TEnum>(this AttributeArgument attributeArgument)
-             where TEnum : System.Enum
+             where TEnum : Enum
         {
             var type = typeof(TEnum);
+            var value = attributeArgument.Value;
 
-            if (attributeArgument.Value == null)
+            if (value is null)
             {
                 throw new InvalidOperationException($"Could not get the '{type.Name}' parameter value.");
             }
 
-            if (!Enum.IsDefined(type, attributeArgument.Value))
+            if (!Enum.IsDefined(type, value))
             {
-                throw new InvalidOperationException($"Could not parse the '{type.Name}' parameter value.");
+                throw new InvalidOperationException($"Enum '{type.Name}' does not contain a value of {value}.");
             }
 
-            return (TEnum)attributeArgument.Value;
+            return (TEnum)value;
         }
     }
 }

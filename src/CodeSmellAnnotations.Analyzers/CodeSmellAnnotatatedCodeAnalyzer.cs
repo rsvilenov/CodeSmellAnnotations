@@ -13,11 +13,12 @@ namespace CodeSmellAnnotations.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CodeSmellAnnotatatedCodeAnalyzer : DiagnosticAnalyzer
     {
-        private static readonly IRule[] _rules = new IRule[]
+
+        private static readonly IAttributeRuleContainer[] _rules = new IAttributeRuleContainer[]
         {
-            new CodeSmellAttributeRule(),
-            new DuplicatedCodeAttributeRule(),
-            new SolidViolationAttributeRule()
+            new CodeSmellAttributeRuleContainer(),
+            new DuplicatedCodeAttributeRuleContainer(),
+            new SolidViolationAttributeRuleContainer()
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => 
@@ -45,6 +46,9 @@ namespace CodeSmellAnnotations.Analyzers
 
         private static void AnalyzeCodeSmellAttributes(SyntaxNodeAnalysisContext context)
         {
+            var existingDiagnostics = context.Compilation.GetDiagnostics();
+            if (HasAttributeInvalidUsageDiagnostic(existingDiagnostics)) return;
+
             var location = GetLocation(context.Node);
             if (location == null) return;
 
@@ -56,9 +60,8 @@ namespace CodeSmellAnnotations.Analyzers
                 var annotationAttributeType = context.SemanticModel.Compilation.GetTypeByMetadataName(rule.TriggeringAttributeType.FullName);
                 var attributeSyntaxMatch = attributesSyntaxList
                     .FirstOrDefault(at => context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType.CompareTo(annotationAttributeType) ?? false);
-                
+
                 if (attributeSyntaxMatch == null) continue;
-                if (context.Compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0592")) return;
 
                 var arguments = GetAttributeArguments(attributeSyntaxMatch, context.SemanticModel);
                 var diagnosis = rule.GetDiagnosis(arguments);
@@ -69,7 +72,7 @@ namespace CodeSmellAnnotations.Analyzers
                         diagnosis.DiagnosticMessageArguments));
             }
         }
-
+        
         private static IEnumerable<AttributeArgument> GetAttributeArguments(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
         {
             var arguments = attributeSyntax.ArgumentList?.Arguments;
@@ -111,6 +114,14 @@ namespace CodeSmellAnnotations.Analyzers
                 MethodDeclarationSyntax methodDeclarationSyntax => methodDeclarationSyntax.Identifier.GetLocation(),
                 _ => null,
             };
+        }
+
+        private static bool HasAttributeInvalidUsageDiagnostic(ImmutableArray<Diagnostic> diagnostics)
+        {
+            const string InvalidAttributeUsageDiagnosticId = "CS0592";
+
+            return diagnostics
+                .Any(diagnostic => diagnostic.Id == InvalidAttributeUsageDiagnosticId);
         }
     }
 }

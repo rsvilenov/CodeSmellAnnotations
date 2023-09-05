@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class DuplicatedCodeAttributeRule : IRule
+    internal partial class DuplicatedCodeAttributeRuleContainer : IAttributeRuleContainer
     {
         public Type TriggeringAttributeType => typeof(DuplicatedCodeAttribute);
 

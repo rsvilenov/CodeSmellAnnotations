@@ -1,12 +1,10 @@
 ﻿using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class DuplicatedCodeAttributeRule : IHaveDescriptors
+    internal partial class DuplicatedCodeAttributeRuleContainer
     {
         private static readonly DiagnosticDescriptor _descriptorSML100
             = new DiagnosticDescriptor("SML100",
