@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class DuplicatesAttributeRuleContainer : IAttributeRuleContainer
+    internal partial class DuplicateOfAttributeRuleContainer : IAttributeRuleContainer
     {
-        public Type TriggeringAttributeType => typeof(DuplicatesAttribute);
+        public Type TriggeringAttributeType => typeof(DuplicateOfAttribute);
 
         public Diagnosis GetDiagnosis(IEnumerable<AttributeArgument> attributeArguments)
         {

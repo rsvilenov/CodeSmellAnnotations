@@ -7,7 +7,7 @@ using Xunit;
 
 namespace CodeSmellAnnotations.Tests
 {
-    public class DuplicatedCodeAttributeAnalysisTest : AnalyzerTestBase
+    public class DuplicateOfCodeAttributeAnalysisTest : AnalyzerTestBase
     {
         private const string _duplicationDiagnosticId = "SML100";
         private const string _oddballSolutionDiagnosticId = "SML101";
@@ -21,7 +21,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [Duplicates(""test"")]
+                    [DuplicateOf(""test"")]
                     public class SomeClass
                     {
                     }
@@ -46,7 +46,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates(""test"")]
+                        [DuplicateOf(""test"")]
                         public SomeClass()
                         {
                         }
@@ -72,7 +72,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates(""test"")]
+                        [DuplicateOf(""test"")]
                         private string _field;
                     }
                 }";
@@ -96,7 +96,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates(""test"")]
+                        [DuplicateOf(""test"")]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
@@ -120,7 +120,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates(""test"")]
+                        [DuplicateOf(""test"")]
                         public bool IsTrue 
                         {
                             get => true;
@@ -150,7 +150,7 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [Duplicates(""test"")]
+                            [DuplicateOf(""test"")]
                             get => true;
                         }
                     }
@@ -175,7 +175,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [Duplicates(""test"", Kind = DuplicationKind." + kind.ToString() + @")]
+                    [DuplicateOf(""test"", Kind = DuplicationKind." + kind.ToString() + @")]
                     public class SomeClass
                     {
                     }
@@ -206,7 +206,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [Duplicates" + duplicatesParameter + @"]
+                    [DuplicateOf" + duplicatesParameter + @"]
                     public class SomeClass
                     {
                     }
@@ -215,7 +215,7 @@ namespace CodeSmellAnnotations.Tests
             await VerifyAttributeParameterAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error)
-                    .WithSpan(7, 22, 7, 32 + (duplicatesParameter?.Length ?? 0))
+                    .WithSpan(7, 22, 7, 33 + (duplicatesParameter?.Length ?? 0))
             });
         }
 
@@ -228,7 +228,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [Duplicates(""test"")]
+                    [DuplicateOf(""test"")]
                     public class SomeClass
                     {
                     }

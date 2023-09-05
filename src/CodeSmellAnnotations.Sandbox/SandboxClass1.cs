@@ -1,21 +1,17 @@
 ﻿using CodeSmellAnnotations.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeSmellAnnotations
 {
     [CodeSmell(Kind.InconsistentNaming)]
-    [Duplicates("t", Kind = DuplicationKind.OddballSolution, Reason = "test")]
+    [DuplicateOf("t", Kind = DuplicationKind.OddballSolution, Reason = "test")]
     internal interface ICodeSmellAnnotations
     {
 
     }
 
     [CodeSmell(Kind.General, Reason = "aa")]
-    [Duplicates("a", Reason = "test")]
+    [DuplicateOf("a", Reason = "test")]
+    [SolidViolation(SolidPrinciple.InterfaceSegregation)]
     internal class SandboxClass1
     {
         //[CodeSmell("empty constructor", Kind.InconsistentNaming)]

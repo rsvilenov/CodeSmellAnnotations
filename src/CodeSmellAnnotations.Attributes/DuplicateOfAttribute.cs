@@ -13,9 +13,9 @@ namespace CodeSmellAnnotations.Attributes
               AttributeTargets.Constructor |
               AttributeTargets.Interface |
               AttributeTargets.Struct)]
-    public class DuplicatesAttribute : Attribute
+    public class DuplicateOfAttribute : Attribute
     {
-        public DuplicatesAttribute(string duplicates)
+        public DuplicateOfAttribute(string duplicates)
         {
             Duplicates = duplicates;
         }

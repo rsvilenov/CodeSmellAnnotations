@@ -61,7 +61,7 @@ namespace CodeSmellAnnotations.Analyzers
                 return;
             }
 
-            var duplicatesAttributeTypeNamedSymbol = context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(DuplicatesAttribute).FullName);
+            var duplicatesAttributeTypeNamedSymbol = context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(DuplicateOfAttribute).FullName);
             if (attributeNamedSymbol.CompareTo(duplicatesAttributeTypeNamedSymbol))
             {
                 DiagnoseSMLE002(context, attributeSyntax);
