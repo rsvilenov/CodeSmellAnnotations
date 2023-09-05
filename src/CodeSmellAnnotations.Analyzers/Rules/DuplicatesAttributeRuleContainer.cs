@@ -7,16 +7,16 @@ using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class DuplicatedCodeAttributeRuleContainer : IAttributeRuleContainer
+    internal partial class DuplicatesAttributeRuleContainer : IAttributeRuleContainer
     {
-        public Type TriggeringAttributeType => typeof(DuplicatedCodeAttribute);
+        public Type TriggeringAttributeType => typeof(DuplicatesAttribute);
 
         public Diagnosis GetDiagnosis(IEnumerable<AttributeArgument> attributeArguments)
         {
+            var duplicates = attributeArguments.ElementAtOrDefault(0)?.Value?.ToString();
+
             var reason = attributeArguments.FirstOrDefault(a => a.Name == "Reason")?.Value?.ToString();
             
-            var duplicates = attributeArguments.FirstOrDefault(a => a.Name == "Duplicates")?.Value?.ToString();
-
             var kind = attributeArguments.FirstOrDefault(a => a.Name == "Kind");
             DuplicationKind kindEnumValue = kind == null ? default : kind.GetEnumValue<DuplicationKind>(); ;
             

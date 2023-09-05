@@ -21,7 +21,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicatedCode]
+                    [Duplicates("")]
                     public class SomeClass
                     {
                     }
@@ -45,7 +45,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicatedCode]
+                        [Duplicates]
                         public SomeClass()
                         {
                         }
@@ -72,7 +72,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicatedCode]
+                        [Duplicates]
                         private string _field;
                     }
                 }";
@@ -95,7 +95,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicatedCode]
+                        [Duplicates]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
@@ -118,7 +118,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [DuplicatedCode]
+                        [Duplicates]
                         public bool IsTrue 
                         {
                             get
@@ -154,7 +154,7 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [DuplicatedCode]
+                            [Duplicates]
                             get
                             {
                                 return false;
@@ -179,7 +179,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicatedCode(Reason = ""reason"")]
+                    [Duplicates(Reason = ""reason"")]
                     public class SomeClass
                     {
                     }
@@ -202,7 +202,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicatedCode(Duplicates = ""OtherClass"")]
+                    [Duplicates(Duplicates = ""OtherClass"")]
                     public class SomeClass
                     {
                         private int _fld;
@@ -230,7 +230,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [DuplicatedCode(Kind = DuplicationKind." + kind.ToString() + @")]
+                    [Duplicates(Kind = DuplicationKind." + kind.ToString() + @")]
                     public class SomeClass
                     {
                         private int _fld;

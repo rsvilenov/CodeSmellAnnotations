@@ -231,7 +231,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify<CodeSmellAnnotations.Analyzers.CodeSmellAttributeArgumentAnalyzer>(testCode, new List<DiagnosticResult>
+            await Verify<CodeSmellAnnotations.Analyzers.AttributeArgumentAnalyzer>(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error)
                     .WithSpan(7, 22, 7, 45 + reasonParameter.Length)
@@ -253,7 +253,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify<CodeSmellAnnotations.Analyzers.CodeSmellAttributeArgumentAnalyzer>(testCode, new List<DiagnosticResult>
+            await Verify<CodeSmellAnnotations.Analyzers.AttributeArgumentAnalyzer>(testCode, new List<DiagnosticResult>
             {
             });
         }

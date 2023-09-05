@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace CodeSmellAnnotations
 {
     [CodeSmell(Kind.InconsistentNaming)]
-    [DuplicatedCode(Duplicates = "t", Kind = DuplicationKind.OddballSolution, Reason = "test")]
+    [Duplicates("t", Kind = DuplicationKind.OddballSolution, Reason = "test")]
     internal interface ICodeSmellAnnotations
     {
 
     }
 
     [CodeSmell(Kind.General, Reason = "aa")]
-    [DuplicatedCode(Reason = "test")]
+    [Duplicates("a", Reason = "test")]
     internal class SandboxClass1
     {
         //[CodeSmell("empty constructor", Kind.InconsistentNaming)]

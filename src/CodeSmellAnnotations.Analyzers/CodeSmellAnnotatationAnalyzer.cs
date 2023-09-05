@@ -17,7 +17,7 @@ namespace CodeSmellAnnotations.Analyzers
         private static readonly IAttributeRuleContainer[] _rules = new IAttributeRuleContainer[]
         {
             new CodeSmellAttributeRuleContainer(),
-            new DuplicatedCodeAttributeRuleContainer(),
+            new DuplicatesAttributeRuleContainer(),
             new SolidViolationAttributeRuleContainer()
         };
 

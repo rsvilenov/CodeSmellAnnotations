@@ -6,4 +6,5 @@
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
 SMLE001 | Build | Error | CodeSmellAttributeArgumentAnalyzer
+SMLE002 | Build | Error | AttributeArgumentAnalyzer
 

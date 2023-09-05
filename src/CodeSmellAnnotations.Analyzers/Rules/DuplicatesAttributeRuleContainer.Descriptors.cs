@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
-    internal partial class DuplicatedCodeAttributeRuleContainer
+    internal partial class DuplicatesAttributeRuleContainer
     {
         private static readonly DiagnosticDescriptor _descriptorSML100
             = new DiagnosticDescriptor("SML100",
