@@ -21,7 +21,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [Duplicates("")]
+                    [Duplicates(""test"")]
                     public class SomeClass
                     {
                     }
@@ -31,6 +31,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
+                    .WithArguments("Duplicates test.", "")
             });
         }
 
@@ -45,12 +46,10 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates]
+                        [Duplicates(""test"")]
                         public SomeClass()
                         {
                         }
-                    
-                        public int Property1 { get; set; }
                     }
                 }";
 
@@ -58,6 +57,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 32, 10, 41)
+                    .WithArguments("Duplicates test.", "")
             });
         }
 
@@ -72,7 +72,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates]
+                        [Duplicates(""test"")]
                         private string _field;
                     }
                 }";
@@ -81,6 +81,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
+                    .WithArguments("Duplicates test.", "")
             });
         }
 
@@ -95,7 +96,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates]
+                        [Duplicates(""test"")]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
@@ -104,6 +105,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
+                    .WithArguments("Duplicates test.", "")
             });
         }
 
@@ -118,18 +120,11 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [Duplicates]
+                        [Duplicates(""test"")]
                         public bool IsTrue 
                         {
-                            get
-                            {
-                                return false;
-                            }
+                            get => true;
                         }
-                        
-                        
-
-                        public int Property1 { get; set; }
                     }
                 }";
 
@@ -138,6 +133,7 @@ namespace CodeSmellAnnotations.Tests
                 
                 new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 43)
+                    .WithArguments("Duplicates test.", "")
             });
         }
 
@@ -154,11 +150,8 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [Duplicates]
-                            get
-                            {
-                                return false;
-                            }
+                            [Duplicates(""test"")]
+                            get => true;
                         }
                     }
                 }";
@@ -166,58 +159,10 @@ namespace CodeSmellAnnotations.Tests
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
-                    .WithSpan(13, 29, 15, 30)
+                    .WithSpan(11, 29, 12, 41)
+                    .WithArguments("Duplicates test.", "")
             });
         }
-
-        [Fact]
-        public async Task DuplicatedCodeAttribute_WithReasonArgument_DiagnosticsWithMessage_Expected()
-        {
-            string testCode = @"
-                using System;
-                using CodeSmellAnnotations.Attributes;
-
-                namespace TestApp
-                {
-                    [Duplicates(Reason = ""reason"")]
-                    public class SomeClass
-                    {
-                    }
-                }";
-
-            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
-            {
-                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
-                    .WithSpan(8, 34, 8, 43)
-                    .WithArguments("", @" reason")
-            });
-        }
-
-        [Fact]
-        public async Task DuplicatedCodeAttribute_WithDuplicatesArgument_DiagnosticsWithMessage_Expected()
-        {
-            string testCode = @"
-                using System;
-                using CodeSmellAnnotations.Attributes;
-
-                namespace TestApp
-                {
-                    [Duplicates(Duplicates = ""OtherClass"")]
-                    public class SomeClass
-                    {
-                        private int _fld;
-                    }
-
-                }";
-
-            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
-            {
-                new DiagnosticResult(_duplicationDiagnosticId, DiagnosticSeverity.Warning)
-                    .WithSpan(8, 34, 8, 43)
-                    .WithArguments(@"Duplicates OtherClass.", "")
-            });
-        }
-
 
         [Theory]
         [InlineData(DuplicationKind.General, _duplicationDiagnosticId)]
@@ -230,10 +175,9 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [Duplicates(Kind = DuplicationKind." + kind.ToString() + @")]
+                    [Duplicates(""test"", Kind = DuplicationKind." + kind.ToString() + @")]
                     public class SomeClass
                     {
-                        private int _fld;
                     }
 
                 }";
@@ -242,6 +186,56 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
+                    .WithArguments("Duplicates test.", "")
+            });
+        }
+
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public async Task SMLE002_Diagnostics_Expected(string duplicatesText)
+        {
+            const string diagnosticId = "SMLE002";
+            string duplicatesParameter = duplicatesText != null 
+                ? $@"(""{duplicatesText}"")" 
+                : $@"(null)";
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [Duplicates" + duplicatesParameter + @"]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await VerifyAttributeParameterAnalysis(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error)
+                    .WithSpan(7, 22, 7, 32 + (duplicatesParameter?.Length ?? 0))
+            });
+        }
+
+        [Fact]
+        public async Task SMLE002_Diagnostics_Not_Expected()
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [Duplicates(""test"")]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await VerifyAttributeParameterAnalysis(testCode, new List<DiagnosticResult>
+            {
             });
         }
     }

@@ -16,7 +16,12 @@ namespace CodeSmellAnnotations.Tests
             await Verify<Analyzers.CodeSmellAnnotatationAnalyzer>(code, expectedDiagnostics);
         }
 
-        protected async Task Verify<TAnalyzer>(string code, List<DiagnosticResult> expectedDiagnostics)
+        protected async Task VerifyAttributeParameterAnalysis(string code, List<DiagnosticResult> expectedDiagnostics)
+        {
+            await Verify<CodeSmellAnnotations.Analyzers.AttributeArgumentAnalyzer>(code, expectedDiagnostics);
+        }
+
+        private async Task Verify<TAnalyzer>(string code, List<DiagnosticResult> expectedDiagnostics)
             where TAnalyzer : DiagnosticAnalyzer, new()
         {
             var test = new Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerTest<TAnalyzer, Microsoft.CodeAnalysis.Testing.Verifiers.XUnitVerifier>

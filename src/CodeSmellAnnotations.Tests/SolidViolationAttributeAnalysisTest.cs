@@ -7,12 +7,12 @@ using Xunit;
 
 namespace CodeSmellAnnotations.Tests
 {
-    public class CodeSmellAttributeAnalysisTest : AnalyzerTestBase
+    public class SolidViolationAttributeAnalysisTest : AnalyzerTestBase
     {
-        private const string _generalCodeSmellDiagnosticId = "SML001";
+        private const string _singleResponsibilityViolationDiagnosticId = "SML201";
 
         [Fact]
-        public async Task CodeSmellAttribute_OnClass_Diagnostics_Expected()
+        public async Task SolidViolationAttribute_OnClass_Diagnostics_Expected()
         {
             const string testCode = @"
                 using System;
@@ -20,7 +20,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [CodeSmell(Kind.General, Reason = ""bad class"")]
+                    [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = ""bad class"")]
                     public class SomeClass
                     {
                     }
@@ -28,14 +28,14 @@ namespace CodeSmellAnnotations.Tests
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_generalCodeSmellDiagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_singleResponsibilityViolationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
                     .WithArguments("bad class")
             });
         }
 
         [Fact]
-        public async Task CodeSmellAttribute_OnConstructor_Diagnostics_Expected()
+        public async Task SolidViolationAttribute_OnConstructor_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -45,7 +45,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass1
                     {
-                        [CodeSmell(Kind.General, Reason = ""bad constructor"")]
+                        [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = ""bad constructor"")]
                         public SomeClass1()
                         {
                         }
@@ -54,14 +54,14 @@ namespace CodeSmellAnnotations.Tests
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_generalCodeSmellDiagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_singleResponsibilityViolationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 32, 10, 42)
                     .WithArguments("bad constructor")
             });
         }
 
         [Fact]
-        public async Task CodeSmellAttribute_OnField_Diagnostics_Expected()
+        public async Task SolidViolationAttribute_OnField_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -71,21 +71,21 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell(Kind.General, Reason = ""bad field"")]
+                        [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = ""bad field"")]
                         private string _field;
                     }
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_generalCodeSmellDiagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_singleResponsibilityViolationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
                     .WithArguments("bad field")
             });
         }
 
         [Fact]
-        public async Task CodeSmellAttribute_OnAutoProperty_Diagnostics_Expected()
+        public async Task SolidViolationAttribute_OnAutoProperty_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -95,21 +95,21 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell(Kind.General, Reason = ""bad auto property"")]
+                        [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = ""bad auto property"")]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_generalCodeSmellDiagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_singleResponsibilityViolationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
                     .WithArguments("bad auto property")
             });
         }
 
         [Fact]
-        public async Task CodeSmellAttribute_OnProperty_Diagnostics_Expected()
+        public async Task SolidViolationAttribute_OnProperty_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -119,7 +119,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell(Kind.General, Reason = ""bad property"")]
+                        [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = ""bad property"")]
                         public bool IsTrue 
                         {
                             get
@@ -133,14 +133,14 @@ namespace CodeSmellAnnotations.Tests
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 
-                new DiagnosticResult(_generalCodeSmellDiagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_singleResponsibilityViolationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 43)
                     .WithArguments("bad property")
             });
         }
 
         [Fact]
-        public async Task CodeSmellAttribute_OnAccessor_Diagnostics_Expected()
+        public async Task SolidViolationAttribute_OnAccessor_Diagnostics_Expected()
         {
             string testCode = @"
                 using System;
@@ -152,7 +152,7 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [CodeSmell(Kind.General, Reason = ""bad accessor"")]
+                            [SolidViolation(SolidPrinciple.SingleResponsibility, Reason = ""bad accessor"")]
                             get
                             {
                                 return false;
@@ -163,29 +163,19 @@ namespace CodeSmellAnnotations.Tests
 
             await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
-                new DiagnosticResult(_generalCodeSmellDiagnosticId, DiagnosticSeverity.Warning)
+                new DiagnosticResult(_singleResponsibilityViolationDiagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(13, 29, 15, 30)
                     .WithArguments("bad accessor")
             });
         }
 
         [Theory]
-        [InlineData(Kind.InappropriateIntimacy, "SML002")]
-        [InlineData(Kind.LekyAbstraction, "SML003")]
-        [InlineData(Kind.SpeculativeGenerality, "SML004")]
-        [InlineData(Kind.IndecentExposure, "SML005")]
-        [InlineData(Kind.VerticalSeparation, "SML006")]
-        [InlineData(Kind.MagicNumbers, "SML007")]
-        [InlineData(Kind.BloatedConstructor, "SML008")]
-        [InlineData(Kind.FeatureEnvy, "SML009")]
-        [InlineData(Kind.HiddenBehavior, "SML010")]
-        [InlineData(Kind.DataClump, "SML011")]
-        [InlineData(Kind.InconsistentNaming, "SML012")]
-        [InlineData(Kind.UncommunicativeNaming, "SML013")]
-        [InlineData(Kind.FallaciousNaming, "SML014")]
-        [InlineData(Kind.TemporalCoupling, "SML015")]
-        [InlineData(Kind.PrimitiveObsession, "SML016")]
-        public async Task SML00X_Diagnostics_Expected(Kind kind, string diagnosticId)
+        [InlineData(SolidPrinciple.SingleResponsibility, "SML201")]
+        [InlineData(SolidPrinciple.OpenClosed, "SML202")]
+        [InlineData(SolidPrinciple.Liskov, "SML203")]
+        [InlineData(SolidPrinciple.InterfaceSegregation, "SML204")]
+        [InlineData(SolidPrinciple.DependencyInversion, "SML205")]
+        public async Task SML20X_Diagnostics_Expected(SolidPrinciple solidPrinciple, string diagnosticId)
         {
             string testCode = @"
                 using System;
@@ -193,7 +183,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [CodeSmell(Kind." + kind.ToString() + @")]
+                    [SolidViolation(SolidPrinciple." + solidPrinciple.ToString() + @")]
                     public class SomeClass
                     {
                     }
@@ -203,54 +193,6 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
-            });
-        }
-
-
-        [Theory]
-        [InlineData(true, "")]
-        [InlineData(true, null)]
-        [InlineData(false, null)]
-        public async Task SMLE001_Diagnostics_Expected(bool includeReason, string reason)
-        {
-            const string diagnosticId = "SMLE001";
-            string reasonParameter = includeReason ? $@", Reason = ""{reason}""" : "";
-            string testCode = @"
-                using System;
-                using CodeSmellAnnotations.Attributes;
-
-                namespace TestApp
-                {
-                    [CodeSmell(Kind.General" + reasonParameter + @")]
-                    public class SomeClass
-                    {
-                    }
-                }";
-
-            await VerifyAttributeParameterAnalysis(testCode, new List<DiagnosticResult>
-            {
-                new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error)
-                    .WithSpan(7, 22, 7, 45 + reasonParameter.Length)
-            });
-        }
-
-        [Fact]
-        public async Task SMLE001_Diagnostics_Not_Expected()
-        {
-            string testCode = @"
-                using System;
-                using CodeSmellAnnotations.Attributes;
-
-                namespace TestApp
-                {
-                    [CodeSmell(Kind.General, Reason = ""rsn"")]
-                    public class SomeClass
-                    {
-                    }
-                }";
-
-            await VerifyAttributeParameterAnalysis(testCode, new List<DiagnosticResult>
-            {
             });
         }
     }

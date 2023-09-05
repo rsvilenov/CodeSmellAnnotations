@@ -46,7 +46,7 @@ namespace CodeSmellAnnotations.Analyzers
 
         private static void AnalyzeCodeSmellAttributes(SyntaxNodeAnalysisContext context)
         {
-            var existingDiagnostics = context.Compilation.GetDiagnostics();
+            var existingDiagnostics = context.Compilation.GetDeclarationDiagnostics();
             if (HasAttributeErrorLevelDiagnostic(existingDiagnostics)) return;
 
             var location = GetLocation(context.Node);
