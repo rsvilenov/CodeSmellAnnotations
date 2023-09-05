@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using CodeSmellAnnotations.Attributes;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    [CodeSmell(""reason"")]
+                    [CodeSmell(Kind.General, Reason = ""bad class"")]
                     public class SomeClass
                     {
                     }
@@ -29,7 +30,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
-                    .WithArguments(@": ""reason""")
+                    .WithArguments("bad class")
             });
         }
 
@@ -42,20 +43,24 @@ namespace CodeSmellAnnotations.Tests
 
                 namespace TestApp
                 {
-                    public class SomeClass
+                    public class SomeClass1
                     {
-                        [CodeSmell(""reason"")]
-                        public SomeClass()
+                        [CodeSmell(Kind.General, Reason = ""bad constructor"")]
+                        public SomeClass1()
                         {
                         }
+
+                        // This field is here to satisfy the compiler.
+                        // Without it we get the following: 'System.InvalidOperationException: Cannot enqueue data after PromiseNotToEnqueue'
+                        private string _field;
                     }
                 }";
 
             await Verify(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
-                    .WithSpan(10, 32, 10, 41)
-                    .WithArguments(@": ""reason""")
+                    .WithSpan(10, 32, 10, 42)
+                    .WithArguments("bad constructor")
             });
         }
 
@@ -70,7 +75,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell(""reason"")]
+                        [CodeSmell(Kind.General, Reason = ""bad field"")]
                         private string _field;
                     }
                 }";
@@ -79,7 +84,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
-                    .WithArguments(@": ""reason""")
+                    .WithArguments("bad field")
             });
         }
 
@@ -94,7 +99,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell(""reason"")]
+                        [CodeSmell(Kind.General, Reason = ""bad auto property"")]
                         public bool IsTrueAuto { get; set; }
                     }
                 }";
@@ -103,7 +108,7 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
-                    .WithArguments(@": ""reason""")
+                    .WithArguments("bad auto property")
             });
         }
 
@@ -118,7 +123,7 @@ namespace CodeSmellAnnotations.Tests
                 {
                     public class SomeClass
                     {
-                        [CodeSmell(""reason"")]
+                        [CodeSmell(Kind.General, Reason = ""bad property"")]
                         public bool IsTrue 
                         {
                             get
@@ -134,7 +139,7 @@ namespace CodeSmellAnnotations.Tests
                 
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 43)
-                    .WithArguments(@": ""reason""")
+                    .WithArguments("bad property")
             });
         }
 
@@ -151,7 +156,7 @@ namespace CodeSmellAnnotations.Tests
                     {
                         public bool IsTrue 
                         {
-                            [CodeSmell(""reason"")]
+                            [CodeSmell(Kind.General, ""bad accessor"")]
                             get
                             {
                                 return false;
@@ -164,7 +169,31 @@ namespace CodeSmellAnnotations.Tests
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(13, 29, 15, 30)
-                    .WithArguments(@": ""reason""")
+                    .WithArguments("bad accessor")
+            });
+        }
+
+        [Theory]
+        [InlineData(Kind.InappropriateIntimacy, "SML002")]
+        [InlineData(Kind.PrimitiveObsession, "SML016")]
+        public async Task SML00X_Diagnostics_Expected(Kind kind, string diagnosticId)
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [CodeSmell(Kind." + kind.ToString() + @")]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await Verify(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult(diagnosticId, DiagnosticSeverity.Warning)
+                    .WithSpan(8, 34, 8, 43)
             });
         }
     }

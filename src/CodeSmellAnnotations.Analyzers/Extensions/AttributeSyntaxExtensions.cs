@@ -1,10 +1,31 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeSmellAnnotations.Analyzers.Extensions
 {
     internal static class AttributeSyntaxExtensions
     {
+        public static IEnumerable<AttributeArgument> GetAttributeArguments(this AttributeSyntax attributeSyntax, SemanticModel semanticModel)
+        {
+            var arguments = attributeSyntax.ArgumentList?.Arguments;
+            if (arguments == null) yield break;
+
+            int index = 0;
+            foreach (AttributeArgumentSyntax attributeArgumentSyntax in arguments)
+            {
+                var argumentValue = semanticModel.GetConstantValue(attributeArgumentSyntax.Expression).Value;
+                var argumentName = attributeArgumentSyntax.GetArgumentName();
+                yield return new AttributeArgument
+                {
+                    Name = argumentName,
+                    Value = argumentValue,
+                    Index = index++
+                };
+            }
+        }
+
         public static string GetArgumentValueAsString(this AttributeSyntax attributeSyntax, int argumentIndex)
         {
             var argumentSyntax = attributeSyntax

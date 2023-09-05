@@ -11,7 +11,7 @@ using System.Linq;
 namespace CodeSmellAnnotations.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class CodeSmellAnnotatatedCodeAnalyzer : DiagnosticAnalyzer
+    public sealed class CodeSmellAnnotatationAnalyzer : DiagnosticAnalyzer
     {
 
         private static readonly IAttributeRuleContainer[] _rules = new IAttributeRuleContainer[]
@@ -47,7 +47,7 @@ namespace CodeSmellAnnotations.Analyzers
         private static void AnalyzeCodeSmellAttributes(SyntaxNodeAnalysisContext context)
         {
             var existingDiagnostics = context.Compilation.GetDiagnostics();
-            if (HasAttributeInvalidUsageDiagnostic(existingDiagnostics)) return;
+            if (HasAttributeErrorLevelDiagnostic(existingDiagnostics)) return;
 
             var location = GetLocation(context.Node);
             if (location == null) return;
@@ -63,7 +63,7 @@ namespace CodeSmellAnnotations.Analyzers
 
                 if (attributeSyntaxMatch == null) continue;
 
-                var arguments = GetAttributeArguments(attributeSyntaxMatch, context.SemanticModel);
+                var arguments = attributeSyntaxMatch.GetAttributeArguments(context.SemanticModel);
                 var diagnosis = rule.GetDiagnosis(arguments);
 
                 context.ReportDiagnostic(
@@ -73,25 +73,7 @@ namespace CodeSmellAnnotations.Analyzers
             }
         }
         
-        private static IEnumerable<AttributeArgument> GetAttributeArguments(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
-        {
-            var arguments = attributeSyntax.ArgumentList?.Arguments;
-            if (arguments == null) yield break;
-            
-            int index = 0;
-            foreach (AttributeArgumentSyntax attributeArgumentSyntax in arguments)
-            {
-                var argumentValue = semanticModel.GetConstantValue(attributeArgumentSyntax.Expression).Value;
-                var argumentName = attributeArgumentSyntax.GetArgumentName();
-                yield return new AttributeArgument
-                {
-                    Name = argumentName,
-                    Value = argumentValue,
-                    Index = index++
-                };
-            }
-        }
-
+        
         private static IEnumerable<AttributeSyntax> GetAttributes(SyntaxNode node)
         {
             return node switch
@@ -116,12 +98,14 @@ namespace CodeSmellAnnotations.Analyzers
             };
         }
 
-        private static bool HasAttributeInvalidUsageDiagnostic(ImmutableArray<Diagnostic> diagnostics)
+        private static bool HasAttributeErrorLevelDiagnostic(ImmutableArray<Diagnostic> diagnostics)
         {
             const string InvalidAttributeUsageDiagnosticId = "CS0592";
+            const string AttributeDoesNotHaveSuchConstructorDiagnosticId = "CS1729";
 
             return diagnostics
-                .Any(diagnostic => diagnostic.Id == InvalidAttributeUsageDiagnosticId);
+                .Any(diagnostic => diagnostic.Id == InvalidAttributeUsageDiagnosticId 
+                    || diagnostic.Id == AttributeDoesNotHaveSuchConstructorDiagnosticId);
         }
     }
 }

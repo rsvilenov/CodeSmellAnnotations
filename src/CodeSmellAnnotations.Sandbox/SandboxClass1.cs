@@ -14,7 +14,7 @@ namespace CodeSmellAnnotations
 
     }
 
-    [CodeSmell(Kind.General, Reason = "refactor")]
+    [CodeSmell(Kind.General, Reason = "aa")]
     [DuplicatedCode(Reason = "test")]
     internal class SandboxClass1
     {

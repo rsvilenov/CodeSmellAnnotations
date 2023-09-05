@@ -6,6 +6,10 @@
     /// </summary>
     public enum Kind
     {
+        /// <summary>
+        /// General code smell. "Reason" should be provided.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML001.md">SML001</see>.
+        /// </summary>
         General,
         /// <summary>
         /// Impossible to understand what the named component does.
