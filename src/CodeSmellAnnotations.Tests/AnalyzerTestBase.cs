@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AnalyzerTest = Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerTest<CodeSmellAnnotations.Analyzers.CodeSmellAnnotatationAnalyzer, Microsoft.CodeAnalysis.Testing.Verifiers.XUnitVerifier>;
 
 namespace CodeSmellAnnotations.Tests
 {
@@ -11,9 +11,15 @@ namespace CodeSmellAnnotations.Tests
         private static readonly string _attributeAssemblyLocation = typeof(CodeSmellAnnotations.Attributes.CodeSmellAttribute).Assembly.Location;
         private static readonly string _analyzerAssemblyLocation = typeof(CodeSmellAnnotations.Analyzers.CodeSmellAnnotatationAnalyzer).Assembly.Location;
         
-        protected async Task Verify(string code, List<DiagnosticResult> expectedDiagnostics)
+        protected async Task VerifyAnnotationAnalysis(string code, List<DiagnosticResult> expectedDiagnostics)
         {
-            var test = new AnalyzerTest
+            await Verify<Analyzers.CodeSmellAnnotatationAnalyzer>(code, expectedDiagnostics);
+        }
+
+        protected async Task Verify<TAnalyzer>(string code, List<DiagnosticResult> expectedDiagnostics)
+            where TAnalyzer : DiagnosticAnalyzer, new()
+        {
+            var test = new Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerTest<TAnalyzer, Microsoft.CodeAnalysis.Testing.Verifiers.XUnitVerifier>
             {
                 TestCode = code
             };
@@ -21,7 +27,7 @@ namespace CodeSmellAnnotations.Tests
             test.TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(_attributeAssemblyLocation));
             test.TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(_analyzerAssemblyLocation));
             test.ExpectedDiagnostics.AddRange(expectedDiagnostics);
-            
+
             await test.RunAsync();
         }
     }

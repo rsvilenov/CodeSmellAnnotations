@@ -25,7 +25,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
@@ -50,7 +50,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 32, 10, 41)
@@ -73,7 +73,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
@@ -96,7 +96,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
@@ -125,7 +125,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
@@ -155,7 +155,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(13, 29, 15, 30)
@@ -177,7 +177,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
@@ -200,7 +200,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)

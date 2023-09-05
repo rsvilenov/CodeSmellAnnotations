@@ -26,7 +26,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
@@ -56,7 +56,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 32, 10, 42)
@@ -80,7 +80,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 33, 10, 46)
@@ -104,7 +104,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(10, 37, 10, 47)
@@ -134,7 +134,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
@@ -165,7 +165,7 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(_diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(13, 29, 15, 30)
@@ -175,6 +175,19 @@ namespace CodeSmellAnnotations.Tests
 
         [Theory]
         [InlineData(Kind.InappropriateIntimacy, "SML002")]
+        [InlineData(Kind.LekyAbstraction, "SML003")]
+        [InlineData(Kind.SpeculativeGenerality, "SML004")]
+        [InlineData(Kind.IndecentExposure, "SML005")]
+        [InlineData(Kind.VerticalSeparation, "SML006")]
+        [InlineData(Kind.MagicNumbers, "SML007")]
+        [InlineData(Kind.BloatedConstructor, "SML008")]
+        [InlineData(Kind.FeatureEnvy, "SML009")]
+        [InlineData(Kind.HiddenBehavior, "SML010")]
+        [InlineData(Kind.DataClump, "SML011")]
+        [InlineData(Kind.InconsistentNaming, "SML012")]
+        [InlineData(Kind.UncommunicativeNaming, "SML013")]
+        [InlineData(Kind.FallaciousNaming, "SML014")]
+        [InlineData(Kind.TemporalCoupling, "SML015")]
         [InlineData(Kind.PrimitiveObsession, "SML016")]
         public async Task SML00X_Diagnostics_Expected(Kind kind, string diagnosticId)
         {
@@ -190,10 +203,58 @@ namespace CodeSmellAnnotations.Tests
                     }
                 }";
 
-            await Verify(testCode, new List<DiagnosticResult>
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
             {
                 new DiagnosticResult(diagnosticId, DiagnosticSeverity.Warning)
                     .WithSpan(8, 34, 8, 43)
+            });
+        }
+
+
+        [Theory]
+        [InlineData(true, "")]
+        [InlineData(true, null)]
+        [InlineData(false, null)]
+        public async Task SMLE001_Diagnostics_Expected(bool includeReason, string reason)
+        {
+            const string diagnosticId = "SMLE001";
+            string reasonParameter = includeReason ? $@", Reason = ""{reason}""" : "";
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [CodeSmell(Kind.General" + reasonParameter + @")]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await Verify<CodeSmellAnnotations.Analyzers.CodeSmellAttributeArgumentAnalyzer>(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult(diagnosticId, DiagnosticSeverity.Error)
+                    .WithSpan(7, 22, 7, 45 + reasonParameter.Length)
+            });
+        }
+
+        [Fact]
+        public async Task SMLE001_Diagnostics_Not_Expected()
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [CodeSmell(Kind.General, Reason = ""rsn"")]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await Verify<CodeSmellAnnotations.Analyzers.CodeSmellAttributeArgumentAnalyzer>(testCode, new List<DiagnosticResult>
+            {
             });
         }
     }
