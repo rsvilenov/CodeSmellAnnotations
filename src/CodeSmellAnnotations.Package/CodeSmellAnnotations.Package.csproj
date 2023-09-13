@@ -13,11 +13,11 @@
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 
 		<PackageId>CodeSmellAnnotations</PackageId>
-		<Version>1.0.0-alpha</Version>
+		<Version>1.0.1-alpha</Version>
 		<Authors>Rosen Svilenov</Authors>
 		<Description>Annotate your C# codebase with attribute-based and hard-to-ignore code quality remarks.</Description>
 		<Copyright>© Rosen Svilenov</Copyright>
-		<PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/rsvilenov/CodeSmellAnnotations</PackageProjectUrl>
 		<PackageIcon>PackageIcon.png</PackageIcon>
