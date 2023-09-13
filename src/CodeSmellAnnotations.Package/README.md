@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Annotate your C# codebase with attribute-based code quality remarks, which are hard-to-ignore.
+## Annotate your C# codebase with attribute-based code quality remarks, which are hard to ignore.
 
 > netstandard2.0 compliant
 
