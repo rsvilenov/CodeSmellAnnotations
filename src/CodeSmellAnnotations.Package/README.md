@@ -1,6 +1,6 @@
-# CodeSmellAnnotations
+﻿# CodeSmellAnnotations
 
-[![.NET](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml/badge.svg)](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  [![nuget](https://img.shields.io/nuget/v/CodeSmellAnnotations)](https://www.nuget.org/packages/CodeSmellAnnotations)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Annotate your C# codebase with attribute-based and hard-to-ignore code quality remarks.
 
@@ -74,10 +74,4 @@ public class StoreItem
 }
 ```
 
-* Get a warning during build:
-
-![image info](./docs/screenshots/shot2.png)
-
-* Navigate to the annotated code by clicking on the warning above:
-
-![image info](./docs/screenshots/shot1.png)
+The code above will result in build warnings, which are easy to spot. Plus, it is easy to navigate to the source of the warnings in the IDE.
