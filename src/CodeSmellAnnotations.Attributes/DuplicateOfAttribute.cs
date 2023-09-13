@@ -4,7 +4,7 @@ namespace CodeSmellAnnotations.Attributes
 {
     /// <summary>
     /// <para>An annotation for code which duplicate another portion of code in the codebase.</para>
-    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/CodeSmells/DuplicateCode.md">Read more</see>
+    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/attributes/DuplicateOfAttribute.md">Read more</see>
     /// </summary>
     [AttributeUsage(AttributeTargets.Property |
               AttributeTargets.Method |

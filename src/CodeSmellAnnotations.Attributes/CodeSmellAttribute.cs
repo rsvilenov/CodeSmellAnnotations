@@ -4,7 +4,7 @@ namespace CodeSmellAnnotations.Attributes
 {
     /// <summary>
     /// <para>General code smell annotation.</para>
-    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/smells/CodeSmell.md">Read more</see>
+    /// <see href="https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/attributes/CodeSmellAttribute.md">Read more</see>
     /// </summary>
     [AttributeUsage(AttributeTargets.Property |
         AttributeTargets.Method | 

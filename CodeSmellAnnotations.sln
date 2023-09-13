@@ -59,6 +59,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "attributes", "attributes", "{4A7856A4-E3DE-4E4C-BA04-644AD6847D26}"
 	ProjectSection(SolutionItems) = preProject
 		docs\attributes\CodeSmellAttribute.md = docs\attributes\CodeSmellAttribute.md
+		docs\attributes\DuplicateOfAttribute.md = docs\attributes\DuplicateOfAttribute.md
+		docs\attributes\SolidViolationAttribute.md = docs\attributes\SolidViolationAttribute.md
 	EndProjectSection
 EndProject
 Global
