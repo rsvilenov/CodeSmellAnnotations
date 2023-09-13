@@ -2,19 +2,13 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Annotate your C# codebase with attribute-based and hard-to-ignore code quality remarks.
+## Annotate your C# codebase with attribute-based code quality remarks, which are hard-to-ignore.
 
 > netstandard2.0 compliant
 
-### Table of Contents  
-
-- [General](#General)
-- [Installation](#Installation)
-- [Usage](#Usage)
 
 
-
-### General
+### Objective
 
 How many times have we spotted a code smell but didn't have enough time to fix it right away?
 Then what do we do? Add a comment, hoping that some day we or somebody else will see this comment and get into fixing the smell? 
@@ -28,19 +22,6 @@ Key features:
   * Attributes to annotate the code, which get picked by the compiler.
   * A number of predefined common code smells, allowing for quick annotation of bad code.
 
-### Installation
-
-You can view the [package page on NuGet](https://www.nuget.org/packages/CodeSmellAnnotations/).
-
-To install `CodeSmellAnnotations`, run the following command in the Package Manager Console:
-
-```
-PM> Install-Package CodeSmellAnnotations
-```
-Or use this command with the .NET CLI:
-```
-> dotnet add package CodeSmellAnnotations
-```
 ### Usage
 
 * Chose the most appropriate one of the following attributes:

@@ -2,19 +2,19 @@
 
 [![.NET](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml/badge.svg)](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  [![nuget](https://img.shields.io/nuget/v/CodeSmellAnnotations)](https://www.nuget.org/packages/CodeSmellAnnotations)
 
-## Annotate your C# codebase with attribute-based and hard-to-ignore code quality remarks.
+## Annotate your C# codebase with attribute-based code quality remarks, which are hard-to-ignore.
 
 > netstandard2.0 compliant
 
 ### Table of Contents  
 
-- [General](#General)
+- [Objective](#Objective)
 - [Installation](#Installation)
 - [Usage](#Usage)
 
 
 
-### General
+### Objective
 
 How many times have we spotted a code smell but didn't have enough time to fix it right away?
 Then what do we do? Add a comment, hoping that some day we or somebody else will see this comment and get into fixing the smell? 
