@@ -15,9 +15,9 @@
 		<PackageId>CodeSmellAnnotations</PackageId>
 		<Version>1.0.0-alpha</Version>
 		<Authors>Rosen Svilenov</Authors>
-		<Description>Helps you annotate code smells in C# in an obtrusive way.</Description>
+		<Description>Annotate your C# codebase with hard-to-ignore code quality remarks.</Description>
 		<Copyright>© Rosen Svilenov</Copyright>
-		<PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+		<PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/rsvilenov/CodeSmellAnnotations</PackageProjectUrl>
 		<PackageIcon>PackageIcon.png</PackageIcon>

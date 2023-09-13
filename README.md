@@ -2,7 +2,7 @@
 
 [![.NET](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml/badge.svg)](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml) [![License](https://img.shields.io/badge/license-GPLv3-blue)](https://www.gnu.org/licenses/lgpl-3.0.en.html)   [![NuGet](https://buildstats.info/nuget/CodeSmellAnnotations)](https://www.nuget.org/packages/CodeSmellAnnotations/)
 
-## Annotate your codebase with hard-to-ignore code quality remarks.
+## Annotate your C# codebase with hard-to-ignore code quality remarks.
 
 > netstandard2.0 compliant
 
@@ -47,7 +47,11 @@ Or use this command with the .NET CLI:
 
 ```csharp
 [CodeSmell(Kind.[PredefinedSmellType])]
+
+// or
 [DuplicateOf("MyDoppleganger")]
+
+// or
 [SolidViolation(SolidPrinciple.SingleResponsibility)]
 ```
 
