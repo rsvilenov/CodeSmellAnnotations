@@ -20,7 +20,7 @@ namespace CodeSmellAnnotations
             a1 = 1;
         }
 
-        [CodeSmell(Kind.HiddenBehavior, Reason = "static method")]
+        [CodeSmell(Kind.HiddenBehavior, Reason = "Can be run from somewhere")]
         public static void Run()
         {
 

@@ -1,9 +1,11 @@
 ﻿using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
+    [SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "Release tracking analyzer doesn't support this syntax.")]
     internal partial class DuplicateOfAttributeRuleContainer
     {
         private static readonly DiagnosticDescriptor _descriptorSML100
@@ -14,7 +16,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Duplicated code",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML002.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML100.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML101
             = new DiagnosticDescriptor("SML101",
@@ -24,7 +26,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Duplicated code",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML002.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML101.md");
 
 
         public DiagnosticDescriptor[] Descriptors => _descriptors;

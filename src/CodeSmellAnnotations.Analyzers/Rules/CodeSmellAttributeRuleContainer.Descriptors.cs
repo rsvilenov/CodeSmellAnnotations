@@ -1,22 +1,15 @@
 ﻿using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
+    [SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "Release tracking analyzer doesn't support this syntax.")]
     internal partial class CodeSmellAttributeRuleContainer
     {
         public DiagnosticDescriptor[] Descriptors => _descriptors;
 
-        // In order for the Roslyn's Release tracking analyzer to work,
-        // the descriptor should be a field and the full "new" expression
-        // should be used (the short one - new("SML00X",...) will break the analysis)
-        //
-        // This seems to be a well-known issue:
-        // https://github.com/dotnet/roslyn-analyzers/issues/5957
-        // https://github.com/dotnet/roslyn-analyzers/issues/5890
-        // https://github.com/docopt/docopt.net/pull/161
-        // https://github.com/dotnet/roslyn-analyzers/issues/5828
 
         private static readonly DiagnosticDescriptor _descriptorSML001
             = new DiagnosticDescriptor("SML001",
@@ -36,7 +29,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Inappropriate intimacy",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML002.md");
 
 
         private static readonly DiagnosticDescriptor _descriptorSML003
@@ -47,7 +40,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML003.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML004
             = new DiagnosticDescriptor("SML004",
@@ -57,7 +50,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML004.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML005
             = new DiagnosticDescriptor("SML005",
@@ -67,7 +60,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML006
             = new DiagnosticDescriptor("SML006",
@@ -77,7 +70,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML006.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML007
             = new DiagnosticDescriptor("SML007",
@@ -87,7 +80,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML007.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML008
             = new DiagnosticDescriptor("SML008",
@@ -97,7 +90,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML008.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML009
             = new DiagnosticDescriptor("SML009",
@@ -107,7 +100,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML009.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML010
             = new DiagnosticDescriptor("SML010",
@@ -117,7 +110,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML010.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML011
             = new DiagnosticDescriptor("SML011",
@@ -127,7 +120,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML011.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML012
             = new DiagnosticDescriptor("SML012",
@@ -137,7 +130,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML012.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML013
             = new DiagnosticDescriptor("SML013",
@@ -147,7 +140,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML013.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML014
             = new DiagnosticDescriptor("SML014",
@@ -157,7 +150,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML014.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML015
             = new DiagnosticDescriptor("SML015",
@@ -167,7 +160,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML015.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML016
             = new DiagnosticDescriptor("SML016",
@@ -177,7 +170,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 description: "Leaky abastraction",
-                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML001.md");
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML016.md");
 
         private static DiagnosticDescriptor[] _descriptors => new[] 
         { 

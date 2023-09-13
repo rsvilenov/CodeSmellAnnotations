@@ -1,9 +1,11 @@
 ﻿using CodeSmellAnnotations.Attributes;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeSmellAnnotations.Analyzers.Rules
 {
+    [SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "Release tracking analyzer doesn't support this syntax.")]
     internal partial class SolidViolationAttributeRuleContainer
     {
         private static readonly DiagnosticDescriptor _descriptorSML201
@@ -14,7 +16,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
                    description: "Violation of SOLID principles",
-                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
+                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML201.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML202
                = new DiagnosticDescriptor("SML202",
@@ -24,17 +26,17 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
                    description: "Violation of SOLID principles",
-                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
+                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML202.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML203
                = new DiagnosticDescriptor("SML203",
                    "SOLID violation",
-                   "SOLID violation: liskov substitution principle. {0}",
+                   "SOLID violation: Liskov substitution principle. {0}",
                    "CodeSmell",
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
                    description: "Violation of SOLID principles",
-                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
+                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML203.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML204
                = new DiagnosticDescriptor("SML204",
@@ -44,7 +46,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
                    description: "Violation of SOLID principles",
-                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
+                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML204.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML205
                = new DiagnosticDescriptor("SML205",
@@ -54,7 +56,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                    DiagnosticSeverity.Warning,
                    isEnabledByDefault: true,
                    description: "Violation of SOLID principles",
-                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML005.md");
+                   helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML205.md");
 
         public DiagnosticDescriptor[] Descriptors =>  _descriptors;
 

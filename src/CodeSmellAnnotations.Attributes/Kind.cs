@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// <para>Common code smells</para>
-    /// <see href="https://en.wikipedia.org/wiki/SOLID">Read more</see>
     /// </summary>
     public enum Kind
     {
@@ -13,84 +12,85 @@
         General,
 
         /// <summary>
-        /// SML002
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML002.md">SML002</see>.
         /// </summary>
         InappropriateIntimacy,
 
         /// <summary>
-        /// SML003
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML003.md">SML003</see>.
         /// </summary>
         LekyAbstraction,
 
         /// <summary>
-        /// SML004
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML004.md">SML004</see>.
         /// </summary>
         SpeculativeGenerality,
 
         /// <summary>
-        /// SML005
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML005.md">SML005</see>.
         /// </summary>
         IndecentExposure,
 
         /// <summary>
-        /// SML006. Using of regions or method grouping.
+        /// Using of regions or method grouping.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML006.md">SML006</see>.
         /// </summary>
         VerticalSeparation,
 
         /// <summary>
-        /// SML007
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML007.md">SML007</see>.
         /// </summary>
         MagicNumbers,
 
         /// <summary>
-        /// SML008
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML008.md">SML008</see>.
         /// </summary>
         BloatedConstructor,
 
         /// <summary>
-        /// SML009
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML009.md">SML009</see>.
         /// </summary>
         FeatureEnvy,
 
         /// <summary>
-        /// SML010
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML010.md">SML010</see>.
         /// </summary>
         HiddenBehavior,
 
         /// <summary>
-        /// SML011
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML011.md">SML011</see>.
         /// </summary>
         DataClump,
 
         /// <summary>
-        /// SML012
         /// 'Foo' should be named 'foo' everywhere in the code.
         /// Stick to the principle of least astonishment (POLA).
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML012.md">SML012</see>.
         /// </summary>
         InconsistentNaming,
 
         /// <summary>
-        /// SML013
         /// Impossible to understand what the named component does.
         /// Stick to the principle of least astonishment (POLA).
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML002.md">SML013</see>.
         /// </summary>
         UncommunicativeNaming,
 
         /// <summary>
-        /// SML014
         /// The name does not describe the behavior accurately.
         /// Stick to the principle of least astonishment (POLA).
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML014.md">SML014</see>.
         /// </summary>
         FallaciousNaming,
 
         /// <summary>
-        /// SML015
         /// Also known as Sequential coupling
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML015.md">SML015</see>.
         /// </summary>
         TemporalCoupling,
 
         /// <summary>
-        /// SML016
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML016.md">SML016</see>.
         /// </summary>
         PrimitiveObsession
     }

@@ -27,6 +27,28 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rules", "rules", "{0232FACF-CA56-44DA-952A-FF537019DE2D}"
 	ProjectSection(SolutionItems) = preProject
 		docs\rules\SML001.md = docs\rules\SML001.md
+		docs\rules\SML002.md = docs\rules\SML002.md
+		docs\rules\SML003.md = docs\rules\SML003.md
+		docs\rules\SML004.md = docs\rules\SML004.md
+		docs\rules\SML005.md = docs\rules\SML005.md
+		docs\rules\SML006.md = docs\rules\SML006.md
+		docs\rules\SML007.md = docs\rules\SML007.md
+		docs\rules\SML008.md = docs\rules\SML008.md
+		docs\rules\SML009.md = docs\rules\SML009.md
+		docs\rules\SML010.md = docs\rules\SML010.md
+		docs\rules\SML011.md = docs\rules\SML011.md
+		docs\rules\SML012.md = docs\rules\SML012.md
+		docs\rules\SML013.md = docs\rules\SML013.md
+		docs\rules\SML014.md = docs\rules\SML014.md
+		docs\rules\SML015.md = docs\rules\SML015.md
+		docs\rules\SML016.md = docs\rules\SML016.md
+		docs\rules\SML100.md = docs\rules\SML100.md
+		docs\rules\SML101.md = docs\rules\SML101.md
+		docs\rules\SML201.md = docs\rules\SML201.md
+		docs\rules\SML202.md = docs\rules\SML202.md
+		docs\rules\SML203.md = docs\rules\SML203.md
+		docs\rules\SML204.md = docs\rules\SML204.md
+		docs\rules\SML205.md = docs\rules\SML205.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F23A8BC1-3257-4DD1-9750-0A961F5EF4AC}"
