@@ -43,6 +43,15 @@ Or use this command with the .NET CLI:
 ```
 ### Usage
 
+* Chose the most appropriate one of the following attributes:
+
+```csharp
+[CodeSmell(Kind.[PredefinedSmellType])]
+[DuplicateOf("MyDoppleganger")]
+[SolidViolation(SolidPrinciple.SingleResponsibility)]
+```
+
+* Annotate the code
 ```csharp
 using CodeSmellAnnotations.Attributes;
 
@@ -54,3 +63,11 @@ public class StoreItem
     public decimal Price { get; set; }
 }
 ```
+
+* Get a warning during build:
+
+![image info](./docs/screenshots/shot2.png)
+
+* Navigate to the annotated code by clicking on the warning above:
+
+![image info](./docs/screenshots/shot1.png)

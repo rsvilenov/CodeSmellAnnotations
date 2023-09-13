@@ -63,6 +63,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "attributes", "attributes", 
 		docs\attributes\SolidViolationAttribute.md = docs\attributes\SolidViolationAttribute.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "screenshots", "screenshots", "{F9426508-0DC4-41DB-B9B0-331092055368}"
+	ProjectSection(SolutionItems) = preProject
+		docs\screenshots\shot1.png = docs\screenshots\shot1.png
+		docs\screenshots\shot2.png = docs\screenshots\shot2.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +103,7 @@ Global
 		{A0A18B06-7D65-4C4B-A197-2405FE7C9D88} = {BC30D4BC-4697-4235-8220-DF08AB58A061}
 		{0232FACF-CA56-44DA-952A-FF537019DE2D} = {BC30D4BC-4697-4235-8220-DF08AB58A061}
 		{4A7856A4-E3DE-4E4C-BA04-644AD6847D26} = {BC30D4BC-4697-4235-8220-DF08AB58A061}
+		{F9426508-0DC4-41DB-B9B0-331092055368} = {BC30D4BC-4697-4235-8220-DF08AB58A061}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CF08B8A-59A7-4832-B718-EB0AD7DD80DB}

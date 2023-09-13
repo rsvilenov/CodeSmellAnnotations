@@ -28,4 +28,6 @@ SML202 | CodeSmell | Warning | SolidViolationAttributeRuleContainer, [Documentat
 SML203 | CodeSmell | Warning | SolidViolationAttributeRuleContainer, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML203.md)
 SML204 | CodeSmell | Warning | SolidViolationAttributeRuleContainer, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML204.md)
 SML205 | CodeSmell | Warning | SolidViolationAttributeRuleContainer, [Documentation](https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML205.md)
+SMLE001 | Build | Error | AttributeArgumentAnalyzer
+SMLE002 | Build | Error | AttributeArgumentAnalyzer
 
