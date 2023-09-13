@@ -53,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rules", "rules", "{0232FACF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F23A8BC1-3257-4DD1-9750-0A961F5EF4AC}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
