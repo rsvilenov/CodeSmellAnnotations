@@ -12,7 +12,7 @@ namespace CodeSmellAnnotations.Attributes
         AttributeTargets.Class | 
         AttributeTargets.Constructor | 
         AttributeTargets.Interface | 
-        AttributeTargets.Struct)]
+        AttributeTargets.Struct, AllowMultiple = true)]
     public class CodeSmellAttribute : Attribute
     {
         public Kind Kind { get; set; }

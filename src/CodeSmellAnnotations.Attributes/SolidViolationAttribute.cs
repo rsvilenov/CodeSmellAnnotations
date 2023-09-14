@@ -12,7 +12,7 @@ namespace CodeSmellAnnotations.Attributes
         AttributeTargets.Class |
         AttributeTargets.Constructor |
         AttributeTargets.Interface |
-        AttributeTargets.Struct)]
+        AttributeTargets.Struct, AllowMultiple = true)]
     public class SolidViolationAttribute : Attribute
     {
         public SolidPrinciple Violates { get; set; }
