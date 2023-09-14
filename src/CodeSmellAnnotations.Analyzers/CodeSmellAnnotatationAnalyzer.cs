@@ -58,18 +58,21 @@ namespace CodeSmellAnnotations.Analyzers
             foreach (var rule in _rules)
             {
                 var annotationAttributeType = context.SemanticModel.Compilation.GetTypeByMetadataName(rule.TriggeringAttributeType.FullName);
-                var attributeSyntaxMatch = attributesSyntaxList
-                    .FirstOrDefault(at => context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType.CompareTo(annotationAttributeType) ?? false);
+                var attributeSyntaxMatches = attributesSyntaxList
+                    .Where(at => context.SemanticModel.GetSymbolInfo(at).Symbol?.ContainingType.CompareTo(annotationAttributeType) ?? false);
 
-                if (attributeSyntaxMatch == null) continue;
+                if (!attributeSyntaxMatches.Any()) continue;
 
-                var arguments = attributeSyntaxMatch.GetAttributeArguments(context.SemanticModel);
-                var diagnosis = rule.GetDiagnosis(arguments);
+                foreach (var attributeSyntaxMatch in attributeSyntaxMatches)
+                {
+                    var arguments = attributeSyntaxMatch.GetAttributeArguments(context.SemanticModel);
+                    var diagnosis = rule.GetDiagnosis(arguments);
 
-                context.ReportDiagnostic(
-                    Diagnostic.Create(diagnosis.Descriptor,
-                        location,
-                        diagnosis.DiagnosticMessageArguments));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(diagnosis.Descriptor,
+                            location,
+                            diagnosis.DiagnosticMessageArguments));
+                }
             }
         }
         

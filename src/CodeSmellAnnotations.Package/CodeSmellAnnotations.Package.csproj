@@ -13,7 +13,7 @@
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 
 		<PackageId>CodeSmellAnnotations</PackageId>
-		<Version>1.0.1-alpha.0.2</Version>
+		<Version>1.0.1-alpha.0.3</Version>
 		<Authors>Rosen Svilenov</Authors>
 		<Description>Annotate your C# codebase with attribute-based code quality remarks, which are hard to ignore.</Description>
 		<Copyright>© Rosen Svilenov</Copyright>
