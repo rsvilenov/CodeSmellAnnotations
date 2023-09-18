@@ -164,6 +164,33 @@ namespace CodeSmellAnnotations.Tests
             });
         }
 
+        [Fact]
+        public async Task DuplicatedCodeAttribute_MultipleAttributes_MultipleDiagnostics_Expected()
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [DuplicateOf(""dup"", Kind = DuplicationKind.General)]
+                    [DuplicateOf(""dup2"", Kind = DuplicationKind.OddballSolution)]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult("SML100", DiagnosticSeverity.Warning)
+                    .WithSpan(9, 34, 9, 43)
+                    .WithArguments("Duplicates dup.", ""),
+                new DiagnosticResult("SML101", DiagnosticSeverity.Warning)
+                    .WithSpan(9, 34, 9, 43)
+                    .WithArguments("Duplicates dup2.", "")
+            });
+        }
+
         [Theory]
         [InlineData(DuplicationKind.General, _duplicationDiagnosticId)]
         [InlineData(DuplicationKind.OddballSolution, _oddballSolutionDiagnosticId)]

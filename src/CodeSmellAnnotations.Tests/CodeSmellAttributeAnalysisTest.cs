@@ -206,6 +206,30 @@ namespace CodeSmellAnnotations.Tests
             });
         }
 
+        [Fact]
+        public async Task CodeSmellAttribute_MultipleAttributes_MultipleDiagnostics_Expected()
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [CodeSmell(Kind.PrimitiveObsession)]
+                    [CodeSmell(Kind.InappropriateIntimacy)]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult("SML016", DiagnosticSeverity.Warning)
+                    .WithSpan(9, 34, 9, 43),
+                new DiagnosticResult("SML002", DiagnosticSeverity.Warning)
+                    .WithSpan(9, 34, 9, 43)
+            });
+        }
 
         [Theory]
         [InlineData(true, "")]

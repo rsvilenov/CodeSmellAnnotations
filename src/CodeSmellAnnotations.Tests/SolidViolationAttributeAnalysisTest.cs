@@ -169,6 +169,31 @@ namespace CodeSmellAnnotations.Tests
             });
         }
 
+        [Fact]
+        public async Task SolidViolationAttribute_MultipleAttributes_MultipleDiagnostics_Expected()
+        {
+            string testCode = @"
+                using System;
+                using CodeSmellAnnotations.Attributes;
+
+                namespace TestApp
+                {
+                    [SolidViolation(SolidPrinciple.SingleResponsibility)]
+                    [SolidViolation(SolidPrinciple.OpenClosed)]
+                    public class SomeClass
+                    {
+                    }
+                }";
+
+            await VerifyAnnotationAnalysis(testCode, new List<DiagnosticResult>
+            {
+                new DiagnosticResult("SML201", DiagnosticSeverity.Warning)
+                    .WithSpan(9, 34, 9, 43),
+                new DiagnosticResult("SML202", DiagnosticSeverity.Warning)
+                    .WithSpan(9, 34, 9, 43)
+            });
+        }
+
         [Theory]
         [InlineData(SolidPrinciple.SingleResponsibility, "SML201")]
         [InlineData(SolidPrinciple.OpenClosed, "SML202")]
