@@ -9,7 +9,6 @@
 ### Table of Contents  
 
 - [Objective](#Objective)
-- [Installation](#Installation)
 - [Usage](#Usage)
 
 
@@ -28,19 +27,6 @@ Key features:
   * Attributes to annotate the code, which get picked by the compiler.
   * A number of predefined common code smells, allowing for quick annotation of bad code.
 
-### Installation
-
-You can view the [package page on NuGet](https://www.nuget.org/packages/CodeSmellAnnotations/).
-
-To install `CodeSmellAnnotations`, run the following command in the Package Manager Console:
-
-```
-PM> Install-Package CodeSmellAnnotations
-```
-Or use this command with the .NET CLI:
-```
-> dotnet add package CodeSmellAnnotations
-```
 ### Usage
 
 * Chose the most appropriate one of the following attributes:
