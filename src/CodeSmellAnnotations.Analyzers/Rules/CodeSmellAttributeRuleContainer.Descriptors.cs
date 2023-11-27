@@ -196,7 +196,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         {
             { Kind.General, _descriptorSML001 },
             { Kind.InappropriateIntimacy, _descriptorSML002 },
-            { Kind.LekyAbstraction, _descriptorSML003 },
+            { Kind.LeakyAbstraction, _descriptorSML003 },
             { Kind.SpeculativeGenerality, _descriptorSML004 },
             { Kind.IndecentExposure, _descriptorSML005 },
             { Kind.VerticalSeparation, _descriptorSML006 },

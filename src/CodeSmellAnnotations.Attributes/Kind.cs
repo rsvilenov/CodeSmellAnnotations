@@ -19,7 +19,7 @@
         /// <summary>
         /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML003.md">SML003</see>.
         /// </summary>
-        LekyAbstraction,
+        LeakyAbstraction,
 
         /// <summary>
         /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML004.md">SML004</see>.

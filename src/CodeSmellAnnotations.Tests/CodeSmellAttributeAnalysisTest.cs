@@ -171,7 +171,7 @@ namespace CodeSmellAnnotations.Tests
 
         [Theory]
         [InlineData(Kind.InappropriateIntimacy, "SML002")]
-        [InlineData(Kind.LekyAbstraction, "SML003")]
+        [InlineData(Kind.LeakyAbstraction, "SML003")]
         [InlineData(Kind.SpeculativeGenerality, "SML004")]
         [InlineData(Kind.IndecentExposure, "SML005")]
         [InlineData(Kind.VerticalSeparation, "SML006")]
