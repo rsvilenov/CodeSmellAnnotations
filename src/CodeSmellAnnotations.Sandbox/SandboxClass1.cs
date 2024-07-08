@@ -6,7 +6,7 @@ namespace Demo
     {
         public string Name { get; set; }
 
-        [CodeSmell(Kind.PrimitiveObsession, Reason = "Use a custom money class with currency info")]
+        [CodeSmell(Kind.PrimitiveObsession, Reason = "Use a custom money class with currency info instead of 'decimal'")]
         public decimal Price { get; set; }
     }
 }
