@@ -13,7 +13,7 @@
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 
 		<PackageId>CodeSmellAnnotations</PackageId>
-		<Version>1.0.1-alpha.0.4</Version>
+		<Version>1.0.1-alpha.0.5</Version>
 		<Authors>Rosen Svilenov</Authors>
 		<Description>Annotate your C# codebase with attribute-based code quality remarks, which are picked up by Roslyn.</Description>
 		<Copyright>© Rosen Svilenov</Copyright>
@@ -26,8 +26,6 @@
 		<PackageTags>code smell;annotations;clean code;analyzers</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -53,6 +51,9 @@
 		<None Include="$(OutputPath)\CodeSmellAnnotations.Attributes.dll" Pack="True" PackagePath="analyzers/dotnet/cs" Visible="false" />
 		<!-- add the attribute dll to the lib folder as well, so that it can be referenced from the consuming projects -->
 		<None Include="$(OutputPath)\CodeSmellAnnotations.Attributes.dll" Pack="True" PackagePath="lib\$(TargetFramework)" Visible="false" />
+		
+		<!-- add the xml documentation -->
+		<None Include="$(OutputPath)\CodeSmellAnnotations.Attributes.xml" Pack="True" PackagePath="lib\$(TargetFramework)" Visible="false" />
 	</ItemGroup>
 
 	<ItemGroup>
