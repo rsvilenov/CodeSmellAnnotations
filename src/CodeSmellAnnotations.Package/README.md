@@ -1,6 +1,8 @@
 ﻿# CodeSmellAnnotations
 
+[![build workflow](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml/badge.svg)](https://github.com/rsvilenov/CodeSmellAnnotations/actions/workflows/dotnet.yml) 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![nuget](https://img.shields.io/nuget/v/CodeSmellAnnotations)](https://www.nuget.org/packages/CodeSmellAnnotations)
 
 ## Annotate your C# codebase with attribute-based code quality remarks, which are hard to ignore.
 

@@ -72,7 +72,7 @@
         /// <summary>
         /// Impossible to understand what the named component does.
         /// Stick to the principle of least astonishment (POLA).
-        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML002.md">SML013</see>.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML013.md">SML013</see>.
         /// </summary>
         UncommunicativeNaming,
 
@@ -92,6 +92,56 @@
         /// <summary>
         /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML016.md">SML016</see>.
         /// </summary>
-        PrimitiveObsession
+        PrimitiveObsession,
+
+        /// <summary>
+        /// Hiding of errors or error details.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML017.md">SML017</see>.
+        /// </summary>
+        ErrorSwallowing,
+
+        /// <summary>
+        /// Code, which should not be in this component.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML018.md">SML018</see>.
+        /// </summary>
+        DoesNotBelong,
+
+        /// <summary>
+        /// Wrong abstraction.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML019.md">SML019</see>.
+        /// </summary>
+        WrongAbstraction,
+
+        /// <summary>
+        /// This code belongs to another layer.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML020.md">SML020</see>.
+        /// </summary>
+        WrongLayer,
+
+        /// <summary>
+        /// Wrong use of inheritance.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML021.md">SML021</see>.
+        /// </summary>
+        InheritanceAbuse,
+
+        /// <summary>
+        /// An interface or api, which decieves the programmer about its purpose/usage.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML022.md">SML022</see>.
+        /// </summary>
+        DeceptiveDesign,
+
+        /// <summary>
+        /// Possible race conditions in the code. 
+        /// Not technically a code smell, but such buggy code often stays unattended for a long time. See <see href="https://en.wikipedia.org/wiki/Heisenbug"/>Heisenbug</see>.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML023.md">SML023</see>.
+        /// </summary>
+        RaceCondition,
+
+        /// <summary>
+        /// Security concern. 
+        /// Not technically a code smell, but, as with RaceCondition, such buggy code often stays unattended for a long time.
+        /// Corresponds to diagnostic rule <see href="https://github.com/rsvilenov/CodeSmellAnnotations/docs/rules/SML024.md">SML024</see>.
+        /// </summary>
+        SecurityConcern
     }
 }

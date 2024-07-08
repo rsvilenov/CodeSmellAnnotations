@@ -13,9 +13,9 @@
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 
 		<PackageId>CodeSmellAnnotations</PackageId>
-		<Version>1.0.1-alpha.0.3</Version>
+		<Version>1.0.1-alpha.0.4</Version>
 		<Authors>Rosen Svilenov</Authors>
-		<Description>Annotate your C# codebase with attribute-based code quality remarks, which are hard to ignore.</Description>
+		<Description>Annotate your C# codebase with attribute-based code quality remarks, which are picked up by Roslyn.</Description>
 		<Copyright>© Rosen Svilenov</Copyright>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -26,6 +26,16 @@
 		<PackageTags>code smell;annotations;clean code;analyzers</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 
 
@@ -33,7 +43,7 @@
 		<None Update="PackageIcon.png" Pack="true" PackagePath="" />
 		<None Update="README.md" Pack="true" PackagePath="" />
 
-		<Content Include="..\..\LICENSE" Pack="true" PackagePath="" >
+		<Content Include="..\..\LICENSE" Pack="true" PackagePath="">
 			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
