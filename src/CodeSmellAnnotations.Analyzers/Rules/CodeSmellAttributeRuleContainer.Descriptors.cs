@@ -45,11 +45,11 @@ namespace CodeSmellAnnotations.Analyzers.Rules
         private static readonly DiagnosticDescriptor _descriptorSML004
             = new DiagnosticDescriptor("SML004",
                 "Speculative generality",
-                "Leaky abastraction. {0}",
+                "Speculative generality. {0}",
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Speculative generality",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML004.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML005
@@ -69,7 +69,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Vertical separation",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML006.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML007
@@ -79,7 +79,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Magic numbers",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML007.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML008
@@ -89,7 +89,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Bloated constructor",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML008.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML009
@@ -99,7 +99,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Feature envy",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML009.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML010
@@ -109,7 +109,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Hidden behavior",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML010.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML011
@@ -119,7 +119,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Data clump",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML011.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML012
@@ -129,7 +129,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Inconsistent naming",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML012.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML013
@@ -139,7 +139,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Uncommunicative naming",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML013.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML014
@@ -149,7 +149,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Fallacious naming",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML014.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML015
@@ -159,7 +159,7 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Temporal coupling",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML015.md");
 
         private static readonly DiagnosticDescriptor _descriptorSML016
@@ -169,8 +169,88 @@ namespace CodeSmellAnnotations.Analyzers.Rules
                 "CodeSmell",
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                description: "Leaky abastraction",
+                description: "Primitive obsession.",
                 helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML016.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML017
+            = new DiagnosticDescriptor("SML017",
+                "Hiding of errors or error details",
+                "Hiding of errors or error details. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "Hiding of errors or error details",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML017.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML018
+            = new DiagnosticDescriptor("SML018",
+                "Code, which should not be in this component",
+                "Code, which should not be in this component. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "Code, which should not be in this component",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML018.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML019
+            = new DiagnosticDescriptor("SML019",
+                "Wrong abstraction",
+                "Wrong abstraction. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "Wrong abstraction",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML019.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML020
+            = new DiagnosticDescriptor("SML020",
+                "This code belongs to another layer",
+                "This code belongs to another layer. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "This code belongs to another layer",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML020.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML021
+            = new DiagnosticDescriptor("SML021",
+                "Wrong use of inheritance",
+                "Wrong use of inheritance. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "Wrong use of inheritance",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML021.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML022
+            = new DiagnosticDescriptor("SML022",
+                "An interface or api, which decieves the programmer about its purpose/usage",
+                "An interface or api, which decieves the programmer about its purpose/usage. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "An interface or api, which decieves the programmer about its purpose/usage",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML022.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML023
+            = new DiagnosticDescriptor("SML023",
+                "Possible race conditions in the code",
+                "Possible race conditions in the code. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "Possible race conditions in the code",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML023.md");
+
+        private static readonly DiagnosticDescriptor _descriptorSML024
+            = new DiagnosticDescriptor("SML024",
+                "Security concern",
+                "Security concern. {0}",
+                "CodeSmell",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: "Security concern",
+                helpLinkUri: "https://github.com/rsvilenov/CodeSmellAnnotations/tree/master/docs/rules/SML024.md");
 
         private static DiagnosticDescriptor[] _descriptors => new[] 
         { 
@@ -189,7 +269,15 @@ namespace CodeSmellAnnotations.Analyzers.Rules
             _descriptorSML013,
             _descriptorSML014,
             _descriptorSML015,
-            _descriptorSML016
+            _descriptorSML016,
+            _descriptorSML017,
+            _descriptorSML018,
+            _descriptorSML019,
+            _descriptorSML020,
+            _descriptorSML021,
+            _descriptorSML022,
+            _descriptorSML023,
+            _descriptorSML024
         };
 
         private static Dictionary<Kind, DiagnosticDescriptor> _kindEnumDiagnosticDescriptorMapping = new()
@@ -210,6 +298,14 @@ namespace CodeSmellAnnotations.Analyzers.Rules
             { Kind.FallaciousNaming, _descriptorSML014 },
             { Kind.TemporalCoupling, _descriptorSML015 },
             { Kind.PrimitiveObsession, _descriptorSML016 },
+            { Kind.ErrorSwallowing, _descriptorSML017 },
+            { Kind.DoesNotBelong, _descriptorSML018 },
+            { Kind.WrongAbstraction, _descriptorSML019 },
+            { Kind.WrongLayer, _descriptorSML020 },
+            { Kind.InheritanceAbuse, _descriptorSML021 },
+            { Kind.DeceptiveDesign, _descriptorSML022 },
+            { Kind.RaceCondition, _descriptorSML023 },
+            { Kind.SecurityConcern, _descriptorSML024 },
         };
 
         private DiagnosticDescriptor GetDescriptorForKind(Kind kind)
